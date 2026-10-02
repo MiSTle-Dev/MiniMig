@@ -1,7 +1,7 @@
 # MiniMig
 MiST Minimig AGA core for IcePi Zero (XL) and FleaFPGA Ohm Lattice ECP5 boards
 
-[icepi-zero-minimig](https://github.com/m1nl/icepi-zero-minimig)
+-> [icepi-zero-minimig](https://github.com/m1nl/icepi-zero-minimig)
 
 minimig (short for Mini Amiga) is an open source re-implementation of an Amiga using a field-programmable gate array (FPGA). Original minimig author is Dennis van Weeren.  
   
