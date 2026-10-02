@@ -1,5 +1,5 @@
 # MiniMig
-**MiST Minimig AGA** core for **IcePi Zero** (XL) and **FleaFPGA Ohm** Lattice ECP5 boards
+**MiST Minimig AGA** core for **IcePi Zero (XL) & Carrier Board** and **FleaFPGA Ohm** Lattice ECP5 boards
 
 -> [icepi-zero-minimig](https://github.com/m1nl/icepi-zero-minimig)  
 -> [FPGA-Companion for the ICEPI-Carrier Board](fpga_companion.uf2)
