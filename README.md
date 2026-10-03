@@ -9,7 +9,7 @@
   
 **Amiga** was an amazing personal computer, announced around 1984, which - at the time - far surpassed any other personal computer on the market, with advanced graphic & sound capabilities, not to mention its great OS with preemptive multitasking capabilities.  
   
-This minimig variant has been upgraded with AGA chipset capabilites, which allows it to emulate the latest Amiga models (Amiga 1200, Amiga 4000 and (partially) Amiga CD32). Ofcourse it also supports previous OCS/ECS Amigas like Amiga 500, Amiga 600 etc.  
+This minimig variant has been upgraded with AGA chipset capabilites, which allows it to emulate the latest Amiga models (Amiga 1200, Amiga 4000 and (partially) Amiga CD32). Of course it also supports previous OCS/ECS Amigas like Amiga 500, Amiga 600 etc.  
 
 ## Downloads 
 
