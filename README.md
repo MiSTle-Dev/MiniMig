@@ -10,7 +10,9 @@
   -> [Download Amiga Vision](https://amiga.vision/)  
 
   
-  -> use [hdf2emu68](hdf2emu68.exe) to add a FAT partition to the Amiga Vision image.
+  -> use [hdf2emu68](hdf2emu68.exe) to add a FAT partition to the Amiga Vision image.  
+
+  -> [MiniMig Boot Art](minimig_boot_art.zip)
 
 **minimig** (short for Mini Amiga) is an open source re-implementation of an Amiga using a field-programmable gate array (FPGA).  
 Original minimig author is Dennis van Weeren.  
