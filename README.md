@@ -5,7 +5,9 @@
   
 -> [FPGA-Companion for the ICEPI-Carrier Board](fpga_companion.uf2)  
   
--> [Download AGS 3.1 beta](https://ftp2.grandis.nu/turran/FTP/Misc/A500%20Mini/AGS/AGS_v3.1_Beta/)
+-> [Download AGS 3.1 beta](https://ftp2.grandis.nu/turran/FTP/Misc/A500%20Mini/AGS/AGS_v3.1_Beta/)  
+
+  -> [Download Amiga Vision](https://amiga.vision/)
   
 
 **minimig** (short for Mini Amiga) is an open source re-implementation of an Amiga using a field-programmable gate array (FPGA).  
