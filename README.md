@@ -5,7 +5,7 @@
   
 -> [FPGA-Companion for the ICEPI-Carrier Board](fpga_companion.uf2)  
   
--> [Download AGS 3.1 beta](https://ftp2.grandis.nu/turran/FTP/Misc/A500%20Mini/AGS/AGS_v3.1_Beta/)  
+-> [Download AGS 3.1 beta](https://ftp2.grandis.nu/turran/FTP/Misc/A500%20Mini/AGS/AGS_v3.1_Beta/) (AGA) 
 
   -> [Download Amiga Vision](https://amiga.vision/)
   
