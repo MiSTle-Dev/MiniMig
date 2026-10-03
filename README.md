@@ -5,8 +5,7 @@
   
 -> [FPGA-Companion for the ICEPI-Carrier Board](fpga_companion.uf2)  
   
-**minimig** (short for Mini Amiga) is an open source re-implementation of an Amiga using a field-programmable gate array (FPGA).  
-Original minimig author is Dennis van Weeren.  
+**minimig** (short for Mini Amiga) is an open source re-implementation of an Amiga using a field-programmable gate array (FPGA). Original minimig author is Dennis van Weeren.  
   
 **Amiga** was an amazing personal computer, announced around 1984, which - at the time - far surpassed any other personal computer on the market, with advanced graphic & sound capabilities, not to mention its great OS with preemptive multitasking capabilities.  
   
