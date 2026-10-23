@@ -1,0 +1,42 @@
+# ignore backup files
+*~
+
+# ignore vi swapfiles
+.*.swp
+
+# ignore compiled python
+*pyc
+
+# ignore some backup files
+*bak
+
+# ignore some c files
+*\.o
+*\.d
+
+# ignore dropbox files
+.dropbox.attr
+
+# ignore directories
+bin/
+rel/
+fpga/*/out/
+fpga/*/db/
+fpga/*/incremental_db/
+greybox_tmp/
+
+# build script shouldn't be in repo
+build.sh
+
+# ignore generated version file
+rtl/minimig/minimig_version.vh
+
+# ignore Quartus work files
+*qws
+PLLJ_PLLSPE_INFO.txt
+
+# NanoMig migrated gitignore
+*~
+*.vcd
+build/
+*.user

@@ -1,0 +1,44 @@
+icepi-zero
+  .sdc: 29 inherited TG68K multicycle lines unchanged
+  .lpf: 32 inherited TG68K multicycle lines unchanged
+  mapped TG68K preferences: 28; 4 source preferences not emitted by mapper
+  report timestamp: 2026-10-23T08:13:01+00:00
+  TRACE totals: 20323 setup, 25 hold violations
+  533 detailed failing entries (report limit applies; endpoint pairs may repeat)
+  menu screen mode: 0 failing entries
+  RTG OSD first enable stage: 0 failing entries
+  native OSD EBR to HDMI: 0 failing entries
+  Companion OSD enable: 0 failing entries
+  disk length to Agnus: 0 failing entries
+  RTG acknowledgement: 0 failing entries
+    30: virtual_top/tg68k/pf68K_Kernel_inst/exec[61] -> virtual_top/tg68k/pf68K_Kernel_inst/ALU/Flags_1[2]
+    24: virtual_top/tg68k/pf68K_Kernel_inst/memaddr_delta_rega[6] -> virtual_top/tg68k/pf68K_Kernel_inst/regfile_ram/RAM0
+    22: virtual_top/tg68k/pf68K_Kernel_inst/memaddr_delta_rega[6] -> virtual_top/tg68k/pf68K_Kernel_inst/regfile_1_ram/RAM0
+    14: virtual_top/tg68k/pf68K_Kernel_inst/exec[29] -> virtual_top/tg68k/pf68K_Kernel_inst/ALU/Flags_1[2]
+    10: virtual_top/tg68k/pf68K_Kernel_inst/memaddr_delta_rega[0] -> virtual_top/sdram/cache/cpu_sm_state[1]
+    10: virtual_top/tg68k/pf68K_Kernel_inst/memaddr_delta_rega[7] -> virtual_top/tg68k/pf68K_Kernel_inst/regfile_ram/RAM0
+     8: virtual_top/tg68k/pf68K_Kernel_inst/exec[61] -> virtual_top/tg68k/pf68K_Kernel_inst/regfile_ram/RAM0
+     8: virtual_top/tg68k/pf68K_Kernel_inst/exec[61] -> virtual_top/tg68k/pf68K_Kernel_inst/regfile_1_ram/RAM0
+  report: fpga/icepi-zero/Minimig_IcePi-Zero/minimig_icepi-zero_Minimig_IcePi-Zero.twr
+icepi-zero-xl
+  .sdc: 29 inherited TG68K multicycle lines unchanged
+  .lpf: 32 inherited TG68K multicycle lines unchanged
+  mapped TG68K preferences: 28; 4 source preferences not emitted by mapper
+  report timestamp: 2026-10-23T08:09:58+00:00
+  TRACE totals: 16905 setup, 116 hold violations
+  488 detailed failing entries (report limit applies; endpoint pairs may repeat)
+  menu screen mode: 0 failing entries
+  RTG OSD first enable stage: 0 failing entries
+  native OSD EBR to HDMI: 0 failing entries
+  Companion OSD enable: 0 failing entries
+  disk length to Agnus: 0 failing entries
+  RTG acknowledgement: 0 failing entries
+    64: virtual_top/tg68k/pf68K_Kernel_inst/execOPC -> virtual_top/tg68k/pf68K_Kernel_inst/ALU/Flags_1[2]
+    31: virtual_top/tg68k/pf68K_Kernel_inst/state[1] -> virtual_top/tg68k/pf68K_Kernel_inst/memmask[3]
+    20: virtual_top/tg68k/pf68K_Kernel_inst/state[1] -> virtual_top/tg68k/pf68K_Kernel_inst/ALU/Flags_1[2]
+     9: virtual_top/tg68k/pf68K_Kernel_inst/regfile_1_ram/RAM0 -> virtual_top/sdram/cache/cpu_sm_adr[7]
+     9: virtual_top/tg68k/pf68K_Kernel_inst/regfile_1_ram/RAM0 -> virtual_top/sdram/cache/cpu_sm_adr[8]
+     7: virtual_top/tg68k/pf68K_Kernel_inst/state[1] -> virtual_top/tg68k/pf68K_Kernel_inst/RDindex_A[3]
+     6: virtual_top/tg68k/pf68K_Kernel_inst/state[1] -> virtual_top/tg68k/pf68K_Kernel_inst/ALU/Flags_1[0]
+     6: virtual_top/tg68k/pf68K_Kernel_inst/regfile_1_ram/RAM0 -> virtual_top/sdram/cache/cpu_cache_ack
+  report: fpga/icepi-zero-xl/Minimig_IcePi-Zero-XL/minimig_icepi-zero_Minimig_IcePi-Zero-XL.twr

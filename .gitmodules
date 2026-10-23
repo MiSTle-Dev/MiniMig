@@ -1,0 +1,6 @@
+[submodule "rtl/tg68k"]
+	path = rtl/tg68k
+	url = https://github.com/m1nl/TG68K.C
+[submodule "rtl/usb_hid_host"]
+	path = rtl/usb_hid_host
+	url = https://github.com/m1nl/usb_hid_host.git

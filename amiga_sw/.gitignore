@@ -1,0 +1,5 @@
+.deps/
+*.lst
+*.adf
+rtgcheck
+minimig-720p.card

@@ -1,0 +1,814 @@
+{
+  "LICENSE": {
+    "source": "icepi-zero-minimig/LICENSE",
+    "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+  },
+  "amiga_sw/rtg/Makefile": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/Makefile",
+    "sha256": "962979a92546d99299509bdadfe782a884a5c55ffc4ab5a87c4a3ba440b65a4a"
+  },
+  "amiga_sw/rtg/download_deps.sh": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/download_deps.sh",
+    "sha256": "6d2ad39429a0fb3c4693b54c35b661166d4cd077c9fe6b5d5a7c21245c716a44"
+  },
+  "amiga_sw/rtg/fd_to_lvo.py": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/fd_to_lvo.py",
+    "sha256": "d95289095d4ec103604c052594b73fa7212db9a3de970e868ffed30d7f62b9c5"
+  },
+  "amiga_sw/rtg/minimig.card.asm": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/minimig.card.asm",
+    "sha256": "d62943bfddacc9648a5bf4355c32be5eeec52ee4b3c22b28095090c5e34b95bb"
+  },
+  "amiga_sw/rtg/rtgcheck.asm": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/rtgcheck.asm",
+    "sha256": "81f4c2e8b4960755dd47eee479534b89e6b5cf7ac131076ea522e3f44714584a"
+  },
+  "amiga_sw/rtg/tests/README.md": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/tests/README.md",
+    "sha256": "476b20c3d40f36e7109fa61fd36c6caa2c073e2f07a0a5d0b1fa9dda239ab0d6"
+  },
+  "amiga_sw/rtg/tests/run.py": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/tests/run.py",
+    "sha256": "caaded4adf4d592e4c482aa8ad55ea8a7222e55476d65ce0344daa08c8fce7c5"
+  },
+  "amiga_sw/rtg/tests/sim_core.py": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/tests/sim_core.py",
+    "sha256": "db8710f0cb88329a460a929da346d2ee6c2d77043daa6ae9fac2bc071e388b07"
+  },
+  "amiga_sw/rtg/tests/test_build.py": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/tests/test_build.py",
+    "sha256": "7d7c02ada92ab0177362f6b21250a1fd5f952fafa6a04c029f5b791c0d9b37f5"
+  },
+  "amiga_sw/rtg/tests/test_driver_fallback.py": {
+    "source": "icepi-zero-minimig/amiga_sw/rtg/tests/test_driver_fallback.py",
+    "sha256": "9cb4fe3f21348816eaea6b06c98a2bd609c02d45f91a01f8b75ef0a55ab040e1"
+  },
+  "bench/cpu_cache_fsm/README.md": {
+    "source": "icepi-zero-minimig/bench/cpu_cache_fsm/README.md",
+    "sha256": "87098a420a9b7b1e62cfdb8f95a7c1fdb92b3e255be672d320a107b8123d6f81"
+  },
+  "bench/cpu_cache_fsm/cpu_cache_fsm_tb.v": {
+    "source": "icepi-zero-minimig/bench/cpu_cache_fsm/cpu_cache_fsm_tb.v",
+    "sha256": "9c427709d39f5e993b3bd7f1baef0f5b810a0e17bdeffbd10fecd85ef9e201ac"
+  },
+  "bench/cpu_cache_fsm/run.py": {
+    "source": "icepi-zero-minimig/bench/cpu_cache_fsm/run.py",
+    "sha256": "7ba7006f86401c2eef61aa41f9d61fa8e985c9a960d787770aae176fe128c1e6"
+  },
+  "bench/cpu_cache_tags/README.md": {
+    "source": "icepi-zero-minimig/bench/cpu_cache_tags/README.md",
+    "sha256": "ed4da42015c29f325a32c52131f4199f79b4b94b4fff0e7b5e9721a0650fd9e0"
+  },
+  "bench/cpu_cache_tags/cpu_cache_tags_tb.v": {
+    "source": "icepi-zero-minimig/bench/cpu_cache_tags/cpu_cache_tags_tb.v",
+    "sha256": "ee750508ae3245a2785f06e01c9ae7ad821f2d3458413636410c000ed626fe67"
+  },
+  "bench/cpu_cache_tags/run.py": {
+    "source": "icepi-zero-minimig/bench/cpu_cache_tags/run.py",
+    "sha256": "ce8af6323d652ea415464ce67587e58143234e2934d3e8074c51e568010e555f"
+  },
+  "bench/ide/Makefile": {
+    "source": "icepi-zero-minimig/bench/ide/Makefile",
+    "sha256": "5aaafb75899c7940fc7850dd4a0f5562f5f731aa578bb600e9d0606f572af706"
+  },
+  "bench/ide/README.md": {
+    "source": "icepi-zero-minimig/bench/ide/README.md",
+    "sha256": "39891babce72d02573f6aa6a0f03b5c5a40e91b68d5acac430c5759783b2a4c8"
+  },
+  "bench/ide/ide_packet_tb.v": {
+    "source": "icepi-zero-minimig/bench/ide/ide_packet_tb.v",
+    "sha256": "f0bc8b3edda4f27cbadd003866760ac712ddfe49fbd480cd708ae2ae0ed2a436"
+  },
+  "bench/input/Makefile": {
+    "source": "icepi-zero-minimig/bench/input/Makefile",
+    "sha256": "dec9a52c299ba99f2d8ff9547d5c481d3ca96330a0c321f3e1022b8d6a8c3729"
+  },
+  "bench/input/README.md": {
+    "source": "icepi-zero-minimig/bench/input/README.md",
+    "sha256": "4bc5039d237644318a65ce336676609dcf900a3918891024fac3f90fa62880a2"
+  },
+  "bench/input/input_events_tb.sv": {
+    "source": "icepi-zero-minimig/bench/input/input_events_tb.sv",
+    "sha256": "d38c9f133d3a57e636f05b613ef21d0355782d27b5c303c97b4e2f7103a4a438"
+  },
+  "bench/rtg_area/README.md": {
+    "source": "icepi-zero-minimig/bench/rtg_area/README.md",
+    "sha256": "d82a8525f65ef41fcc6ddbad07da859d398dd3e2707a3f8ee330bbfae97758ef"
+  },
+  "bench/rtg_area/assess.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess.py",
+    "sha256": "1af3f810c1ba711fd8564ef1ac8ef2125446e317ff5723a7dcace8782c712286"
+  },
+  "bench/rtg_area/assess_countdown.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess_countdown.py",
+    "sha256": "d624205e8b0e65c59c197f376df47e1d845920c8a8195d15e91ed01c66895e0b"
+  },
+  "bench/rtg_area/assess_hdmi_audio.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess_hdmi_audio.py",
+    "sha256": "e127cab5b2ffe5d746f334af58a6ee52dd5a1c9ea36492ae2ea937d8549f029b"
+  },
+  "bench/rtg_area/assess_lut_options.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess_lut_options.py",
+    "sha256": "9f49362bfd8c60b2bd79f25d2262084b741cb1a7ba031de6a79d83d781aa35b7"
+  },
+  "bench/rtg_area/assess_totals.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess_totals.py",
+    "sha256": "2b67fca6276de3948251cbc222994c557db51878f96f72291d9086cf19f38582"
+  },
+  "bench/rtg_area/assess_viewport.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess_viewport.py",
+    "sha256": "236ed8db53299afb137a93a42c2a47ad38de8a873fd6c83e2e6c39bea0987bbc"
+  },
+  "bench/rtg_area/assess_viewport_packing.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/assess_viewport_packing.py",
+    "sha256": "dd8dc717c3e8019121821e1f3d47f904a63392ee2a01b818114ff3cceb9aab3e"
+  },
+  "bench/rtg_area/check_config_paths.py": {
+    "source": "icepi-zero-minimig/bench/rtg_area/check_config_paths.py",
+    "sha256": "257628afc8922c2e395ef76ff48ee3621d6e04fd70df600068364a17c8556247"
+  },
+  "bench/rtg_area/fetch_equivalence.v": {
+    "source": "icepi-zero-minimig/bench/rtg_area/fetch_equivalence.v",
+    "sha256": "9eaee7efdf227bf3a108c58ade32f0226c5636b5b2d943afb2f355634bef0ef4"
+  },
+  "bench/rtg_hdmi/audio_cdc_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/audio_cdc_tb.v",
+    "sha256": "44bba24aa701d753cdfcdab99563620ac369bcb1d579a167c924215082252144"
+  },
+  "bench/rtg_hdmi/avi_checksum_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/avi_checksum_tb.sv",
+    "sha256": "3ac2952a82d63fe728350fabeb5481b3ed176cf5b1b9ecc8fd865f7293edbc9c"
+  },
+  "bench/rtg_hdmi/hdmi_audio_counter_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/hdmi_audio_counter_tb.sv",
+    "sha256": "01e57ec83c66fa58e7ddf5cc67ec3849a0252ea0cb7b1af3cc737f2e24941d3f"
+  },
+  "bench/rtg_hdmi/hdmi_audio_queue_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/hdmi_audio_queue_tb.sv",
+    "sha256": "b365e2fb7858b743278e4ca58f81ef50d5dfca9026d6f1fab2f4f71fd0902b33"
+  },
+  "bench/rtg_hdmi/hdmi_audio_stream_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/hdmi_audio_stream_tb.sv",
+    "sha256": "98b6c2d0adf5393141b949ec5a5c300359db596f511b67bcc3cbb1355a7486ca"
+  },
+  "bench/rtg_hdmi/hdmi_config_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/hdmi_config_tb.sv",
+    "sha256": "10b0ef9edbdb93b97946f84ac485d6fa8e382187919960502d8a49bab97da3b1"
+  },
+  "bench/rtg_hdmi/hdmi_reset_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/hdmi_reset_tb.sv",
+    "sha256": "caf8bbce62b8c2fc0845b97fc7f12a88a42e5ab0f7560908390f8f9234134262"
+  },
+  "bench/rtg_hdmi/hdmi_rtg_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/hdmi_rtg_tb.v",
+    "sha256": "2285e6883505eee23777877e7f42c2caae8042699221baacaf0a3f4783e26c07"
+  },
+  "bench/rtg_hdmi/rtg_cpu_mmio.asm": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_cpu_mmio.asm",
+    "sha256": "b81871b91b69a3cb72080388ee957cde57ff07a921e992f94ebfa5ae8e63d89a"
+  },
+  "bench/rtg_hdmi/rtg_cpu_mmio_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_cpu_mmio_tb.v",
+    "sha256": "b9c02bc757ea4cb03c0ca009079868c2dcaef0d1f964ef07bd93095212fe3fa5"
+  },
+  "bench/rtg_hdmi/rtg_fifo_reset_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_fifo_reset_tb.v",
+    "sha256": "424f37ea5ad7fc915fa258b02f94d871b9516033cfd710c712724d5bfb75a098"
+  },
+  "bench/rtg_hdmi/rtg_osd_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_osd_tb.v",
+    "sha256": "f868bf9ef7fa3374b5498dfe1315290421916d9019b5cb0e4b6846293702423a"
+  },
+  "bench/rtg_hdmi/rtg_priority_stress_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_priority_stress_tb.v",
+    "sha256": "4d097e7b70db3b6526b252126e676d6258e3ea607808486b4d00a6931f2781b2"
+  },
+  "bench/rtg_hdmi/rtg_register_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_register_tb.v",
+    "sha256": "79482128615dbd68dc3417168a191409a1227c3ccdba305c0f73ba0d9fecf0e1"
+  },
+  "bench/rtg_hdmi/rtg_repeat_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_repeat_tb.v",
+    "sha256": "88c5888bd5e6b2142c191e6d01fb0ced754f1ce9a49a1e43bcb80e794d496de0"
+  },
+  "bench/rtg_hdmi/rtg_sdram_address_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_sdram_address_tb.v",
+    "sha256": "052304069df305837475192b1fdb8d10d72dc3110a0229aed797c1492d9687d3"
+  },
+  "bench/rtg_hdmi/rtg_sdram_contention_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_sdram_contention_tb.v",
+    "sha256": "17ae84a9c533e94852069a2f06c974da48993f337bda65609015cab953c1b1d7"
+  },
+  "bench/rtg_hdmi/rtg_top_config_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_top_config_tb.v",
+    "sha256": "59b5ca523d38ba248e66c10fc5a678be70ae3007c692bfd7a67112a7adcfc4d1"
+  },
+  "bench/rtg_hdmi/rtg_vblank_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_vblank_tb.v",
+    "sha256": "955fbe13fec0c009a8e65dd9c0d2191b24c15264dea5a3ff57b8208e1cd2e271"
+  },
+  "bench/rtg_hdmi/rtg_video_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_video_tb.v",
+    "sha256": "2d253b218dce4aa031673bffa249488e758ea91f487a8928f92a1e39324f6c2c"
+  },
+  "bench/rtg_hdmi/rtg_viewport_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/rtg_viewport_tb.v",
+    "sha256": "24fda01522cec6f1d061ba2eef731e0932a490c834cdcea77eda89f8d0c33c1a"
+  },
+  "bench/rtg_hdmi/run.py": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/run.py",
+    "sha256": "39421bf5dc60b42f8c1cda231cb749b77be9a3c6e4d65b4377e6686d4233eb5a"
+  },
+  "bench/rtg_hdmi/run_cpu_mmio.sh": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/run_cpu_mmio.sh",
+    "sha256": "0adc83c91ccca98cda91314d2d9d9077b594398c73ef5d658a2f68cd83fb4f91"
+  },
+  "bench/rtg_hdmi/serializer_lattice_tb.sv": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/serializer_lattice_tb.sv",
+    "sha256": "fb100a74e1069ad2666b0c00c8f348310974f6ee19e1fd9196f030ca5499e38f"
+  },
+  "bench/rtg_hdmi/test_driver_fallback.py": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/test_driver_fallback.py",
+    "sha256": "68894e462ca6acd8563c9c7b922c2d0a14d04c62bacceadae98874eb2aac6766"
+  },
+  "bench/rtg_hdmi/tmds_stubs.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/tmds_stubs.v",
+    "sha256": "3b217a7edc38b4e1e3adbfddb9dcc500a405d59986c998212f5b39d9eca6fb55"
+  },
+  "bench/rtg_hdmi/video_clock_control_tb.v": {
+    "source": "icepi-zero-minimig/bench/rtg_hdmi/video_clock_control_tb.v",
+    "sha256": "3aad3c045e0a4db7b9e018e5ba20baaa85a0b4b85a0776c339ea1e29a81741f6"
+  },
+  "config/amiga.xml": {
+    "source": "NanoMig/src/lattice/icepi-zero/amiga.xml",
+    "sha256": "d5162a9ed43b1530748376a17ed0f7bd163c697ab30dc8afe45f971d35401d43"
+  },
+  "fpga/icepi-zero-xl/board_config.vhd": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/board_config.vhd",
+    "sha256": "a22aca70089b0c0a9022282b1ddd3b19ce0931e53bab6191aea6970504009769"
+  },
+  "fpga/icepi-zero-xl/build.sh": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/build.sh",
+    "sha256": "3257cfdb4a0ae8a0328c9889a715666c5387b0957ee0080fee5161bf8bd1e3c8"
+  },
+  "fpga/icepi-zero-xl/build.tcl": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/build.tcl",
+    "sha256": "053ba3187d9b356e0d1d8ddec2b617758afb81571b35ba889a2d7bf676f62413"
+  },
+  "fpga/icepi-zero-xl/diamondc.grc": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/diamondc.grc",
+    "sha256": "1577c78730b92a3234090baf19988ed15d75abbca036141b10d6981fad94b67a"
+  },
+  "fpga/icepi-zero-xl/icepi-zero-xl.lpf": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/icepi-zero-xl.lpf",
+    "sha256": "32e33053e198c8b7dc80784d39f3a84f8b58836d43d2a6845e482909f2c9a728"
+  },
+  "fpga/icepi-zero-xl/minimig_board.vh": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/minimig_board.vh",
+    "sha256": "89ad10fd23a2205325f57e5ea0204d5a5b9c0778b25135d3a3dbe53bbdb38391"
+  },
+  "fpga/icepi-zero-xl/minimig_icepi-zero-xl.ldf": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/minimig_icepi-zero-xl.ldf",
+    "sha256": "48e4e012d067ff7a119eef112c9b1f56bd90d82e5cf3deaf933b7fa01412cd74"
+  },
+  "fpga/icepi-zero-xl/minimig_icepi-zero-xl.sdc": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/minimig_icepi-zero-xl.sdc",
+    "sha256": "92a171952564a6e6a0583d83c833c01b939914efa6e0b3f7d3937a217dd3262a"
+  },
+  "fpga/icepi-zero-xl/minimig_icepizero.sty": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero-xl/minimig_icepizero.sty",
+    "sha256": "995db40e639749748c0914b1f4bc6a30ec647dbb96236257b3d6ebd05d66750a"
+  },
+  "fpga/icepi-zero/board_config.vhd": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/board_config.vhd",
+    "sha256": "84bacb974e31252b38847b42895bf441e62377a617b8328f653394c83a994f66"
+  },
+  "fpga/icepi-zero/build.sh": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/build.sh",
+    "sha256": "3257cfdb4a0ae8a0328c9889a715666c5387b0957ee0080fee5161bf8bd1e3c8"
+  },
+  "fpga/icepi-zero/build.tcl": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/build.tcl",
+    "sha256": "0dea61d188fd01ed0b58fce24d6f7cba69dcf7d8ae92634dfe22fcf47204bd6d"
+  },
+  "fpga/icepi-zero/diamondc.grc": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/diamondc.grc",
+    "sha256": "1577c78730b92a3234090baf19988ed15d75abbca036141b10d6981fad94b67a"
+  },
+  "fpga/icepi-zero/icepi-zero.lpf": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/icepi-zero.lpf",
+    "sha256": "c5b8d277016d971de0b6aa0c2571ee1ccd322183d76d7c8dcdaa05e9352173ce"
+  },
+  "fpga/icepi-zero/minimig_board.vh": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/minimig_board.vh",
+    "sha256": "89ad10fd23a2205325f57e5ea0204d5a5b9c0778b25135d3a3dbe53bbdb38391"
+  },
+  "fpga/icepi-zero/minimig_icepi-zero.ldf": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/minimig_icepi-zero.ldf",
+    "sha256": "2b1fc2866edd4e2769ed177fb5a29f6bc8b670284a635c302588965e93019570"
+  },
+  "fpga/icepi-zero/minimig_icepi-zero.sdc": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/minimig_icepi-zero.sdc",
+    "sha256": "75af6d430c6956bfbde00d610b60041851324d4eb28af973dc737956a5c8386b"
+  },
+  "fpga/icepi-zero/minimig_icepizero.sty": {
+    "source": "icepi-zero-minimig/fpga/icepi-zero/minimig_icepizero.sty",
+    "sha256": "56551457c30ffdbd091f4e2a7a288e183bcc5397a9d980b8234dd05400705fc6"
+  },
+  "rtl/audio/AudioMix.vhd": {
+    "source": "icepi-zero-minimig/rtl/audio/AudioMix.vhd",
+    "sha256": "3fb0a426b55d1565a89694eb917c5a31c96a1ba7f594120faa9cc7f585abd9fb"
+  },
+  "rtl/audio/audiofilter.vhd": {
+    "source": "icepi-zero-minimig/rtl/audio/audiofilter.vhd",
+    "sha256": "e771eb6b9aa568da4fd072d15e993d935b850db9fdbfba5faaec360dd451d7fb"
+  },
+  "rtl/fifo/circular_fifo.v": {
+    "source": "icepi-zero-minimig/rtl/fifo/circular_fifo.v",
+    "sha256": "a53291a0ec35de1739bb097afc1ef082644930b772e06a3c2377afc6dcc840a6"
+  },
+  "rtl/fifo/sync_fifo.v": {
+    "source": "icepi-zero-minimig/rtl/fifo/sync_fifo.v",
+    "sha256": "6beedb0c6da2c7e3b9acaab309814ff517550359e511a4d9dce6dd230b3ad08f"
+  },
+  "rtl/hdmi/audio_cdc.v": {
+    "source": "icepi-zero-minimig/rtl/hdmi/audio_cdc.v",
+    "sha256": "fed8dc56cc9fb01f6f4a2928a06f666c17e41daefef638284b23e5a02fa78569"
+  },
+  "rtl/hdmi/audio_clock_regeneration_packet.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/audio_clock_regeneration_packet.sv",
+    "sha256": "fadde47edf5184af150b5d1490cfb7b3b96a310e58efcb588b35024f11fd35e5"
+  },
+  "rtl/hdmi/audio_info_frame.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/audio_info_frame.sv",
+    "sha256": "01e162c88b0dfcbdfa18ca1e28f3f88f576207ab2a48d29eaa6d4917e3284af7"
+  },
+  "rtl/hdmi/audio_sample_packet.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/audio_sample_packet.sv",
+    "sha256": "b78d33dcebeaeb6c37a145012619bdf9b438f11f435e299f2165e56ab6aabd0f"
+  },
+  "rtl/hdmi/auxiliary_video_information_info_frame.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/auxiliary_video_information_info_frame.sv",
+    "sha256": "a2b2ae1fb03e85cebbb760e20a00e9ba6d376668561f624f8b211fadfe3b55e9"
+  },
+  "rtl/hdmi/hdmi.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/hdmi.sv",
+    "sha256": "e10129f889e9c385c8d91dd5f5f59137408c5daf70710c8ea658b8162ea99f7e"
+  },
+  "rtl/hdmi/packet_assembler.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/packet_assembler.sv",
+    "sha256": "93372a3345838b7c3cef77a4fcba446fad1f7ada80d7fd1feb61fb2dc274cdcb"
+  },
+  "rtl/hdmi/packet_picker.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/packet_picker.sv",
+    "sha256": "1d8d50143f6730725ad15573e07033c0ff2aae1cc1bbcaf267135243b080136f"
+  },
+  "rtl/hdmi/serializer.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/serializer.sv",
+    "sha256": "b1702cdf4ab4a93190bcd1fc960f9ebc2280c5231a2f380d17d029c11c38b226"
+  },
+  "rtl/hdmi/source_product_description_info_frame.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/source_product_description_info_frame.sv",
+    "sha256": "cc63c302d19788e008d7c0c8c6c06e968fda79aa10d1e5b8098d948e8ba611dc"
+  },
+  "rtl/hdmi/tmds_channel.sv": {
+    "source": "icepi-zero-minimig/rtl/hdmi/tmds_channel.sv",
+    "sha256": "80f4dbae6462245a27a2fac6617dfa205136822fa6577b605ee6f1701b16e971"
+  },
+  "rtl/hdmi/video_clock_control.v": {
+    "source": "icepi-zero-minimig/rtl/hdmi/video_clock_control.v",
+    "sha256": "70144af447e7df222b7b125c4c3ce79866d0672618467bdfc570431eaa1d1caa"
+  },
+  "rtl/lattice/amiga_clk.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/amiga_clk.v",
+    "sha256": "3af79810d040e53aa139498dcffd49f8019e22b08e97f2d2a32efdcd863f5456"
+  },
+  "rtl/lattice/amiga_clk_lattice.vhd": {
+    "source": "icepi-zero-minimig/rtl/lattice/amiga_clk_lattice.vhd",
+    "sha256": "9ff7ecd4d0c3a86246f4e2d4f930f37c8564c9edefe4630f521c7ddaf2fb3e37"
+  },
+  "rtl/lattice/amiga_clk_lattice_pll.vhd": {
+    "source": "icepi-zero-minimig/rtl/lattice/amiga_clk_lattice_pll.vhd",
+    "sha256": "6369746a66fefc569df71eef5efab45d61b816502ff36c1b785467d051c14ae7"
+  },
+  "rtl/lattice/bitplane_ram.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/bitplane_ram.v",
+    "sha256": "1c79550cd9322cf7424d70ff1e91bf0fd7664d35212ad46565a81038860db5b4"
+  },
+  "rtl/lattice/denise_colortable_ram_mf.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/denise_colortable_ram_mf.v",
+    "sha256": "4b48f03d8a9020728335d6f119562a5bf599ab5a6f86746812fc0a9340f612b5"
+  },
+  "rtl/lattice/dpram_256x32.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/dpram_256x32.v",
+    "sha256": "a1679c9d9621c446a4a479b6c46e363e85f980951ae3b48b95a8bc0bd3a3acee"
+  },
+  "rtl/lattice/dpram_be_1024x32.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/dpram_be_1024x32.v",
+    "sha256": "2b4b710b40c806fd8fc6f454112ebda3b328be620b5558b6b6beabb91d7e481f"
+  },
+  "rtl/lattice/ecp5pll.vhd": {
+    "source": "icepi-zero-minimig/rtl/lattice/ecp5pll.vhd",
+    "sha256": "14d4080279a0982ce0b1efbafe658d6473899baefc418ca3b91d5cf072476b97"
+  },
+  "rtl/lattice/spram_be_512x32.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/spram_be_512x32.v",
+    "sha256": "3eed92e887ddc7c2b86cecc70476eb17da71b8d7a11d974b13af9c9b19f1a7ff"
+  },
+  "rtl/lattice/sprite_ram.v": {
+    "source": "icepi-zero-minimig/rtl/lattice/sprite_ram.v",
+    "sha256": "684ec177aa3d7a4ad215b784b3f712eb7a9e88bcf309c2c425ec28f02ae5c522"
+  },
+  "rtl/minimig/agnus.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus.v",
+    "sha256": "55c9aa95bdbc5f760dad03fef11d2f3fb0ec420f0c049da0729e88cfd4663962"
+  },
+  "rtl/minimig/agnus_audiodma.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_audiodma.v",
+    "sha256": "3e1ecd8ea8a88d471e05880885e7429eafcadcbf5639942aef0e5a139b9e93bd"
+  },
+  "rtl/minimig/agnus_beamcounter.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_beamcounter.v",
+    "sha256": "c5588d753a4b711c9d556ce58d9b5b1add411d07954df5a50e43d3b5822e9085"
+  },
+  "rtl/minimig/agnus_bitplanedma.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_bitplanedma.v",
+    "sha256": "2609bd3ba73b915bc1fd2651d61b89e92baa742e38e47dd983f44bb832457ffb"
+  },
+  "rtl/minimig/agnus_blitter.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_blitter.v",
+    "sha256": "3d2cff817379f8d259ee8b34ac5232f4a5bd8488b3a0e84d4ed665262f2f3efd"
+  },
+  "rtl/minimig/agnus_blitter_adrgen.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_blitter_adrgen.v",
+    "sha256": "7f13030dbdc9f07663fea5e865bf6ebdd135df2a620c2edc539cae086458c9be"
+  },
+  "rtl/minimig/agnus_blitter_barrelshifter.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_blitter_barrelshifter.v",
+    "sha256": "6ebe588d02bb2f28c682dc1b829939c4e282c0a3a3da3f677a8f1ac0ecfe5ddf"
+  },
+  "rtl/minimig/agnus_blitter_fill.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_blitter_fill.v",
+    "sha256": "c360349591f63a7e31e26bc4c5dbda5ef497a3070d9d8986fbf941f837b9d135"
+  },
+  "rtl/minimig/agnus_blitter_minterm.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_blitter_minterm.v",
+    "sha256": "476dcb16a5f8ba4838b0a1c19db81b24339c1870089d385bd753fdf2705e4039"
+  },
+  "rtl/minimig/agnus_copper.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_copper.v",
+    "sha256": "7e78907555caa3b9eeee496a87fb96db6a4b84761954004f881483e10cb0323b"
+  },
+  "rtl/minimig/agnus_diskdma.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_diskdma.v",
+    "sha256": "017463283858c4d03bd7b766fa4212aa86420212230a5b4cf61f918d02cfdc75"
+  },
+  "rtl/minimig/agnus_refresh.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_refresh.v",
+    "sha256": "2ce33e78a551204b1c99f6df38a4a579ee55276080a71884896d520608eb66ec"
+  },
+  "rtl/minimig/agnus_spritedma.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/agnus_spritedma.v",
+    "sha256": "ecf886be0c88a46268922560c05e5d6f22126370e0f38737a43451e02c75f81d"
+  },
+  "rtl/minimig/amber.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/amber.v",
+    "sha256": "6ce63c85e7bf1c236c8ef0feea9113eb08d674e4e0661584ee0c051710e7efe5"
+  },
+  "rtl/minimig/amiga_keyboard.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/amiga_keyboard.v",
+    "sha256": "d00c7d428913abfa779a76f4d7e25119c1faede2afc2a8ff62470c823c0b8f77"
+  },
+  "rtl/minimig/cart.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/cart.v",
+    "sha256": "6f0d1f2540c0acd3f58a45e6d8d9efde3ce91c0db6ab2f765f90b8150f4f50c5"
+  },
+  "rtl/minimig/cdda_fifo.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/cdda_fifo.v",
+    "sha256": "17f7b224e2d7c861f61d5e64cd132002bbd33fd98bb6cd31678acba65f1dea4d"
+  },
+  "rtl/minimig/cia_int.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/cia_int.v",
+    "sha256": "e8141ecaba21d7a4e6ab221f1da8427c98f16dd20066b1f158bf4af06153d8a7"
+  },
+  "rtl/minimig/cia_timera.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/cia_timera.v",
+    "sha256": "7f2ece083100fcc0e34e5839d73e7c0537fb0d083ded194beed17c03697abb66"
+  },
+  "rtl/minimig/cia_timerb.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/cia_timerb.v",
+    "sha256": "14a15bd0cb31a7d6585d174379c78fc693cd67a2e382306379419b73fd0db7fb"
+  },
+  "rtl/minimig/cia_timerd.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/cia_timerd.v",
+    "sha256": "06cf782c948c2254ca161590a42ae9c41fa39e49d2d9858ee7423e0b0c8db026"
+  },
+  "rtl/minimig/ciaa.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/ciaa.v",
+    "sha256": "b4a91217373c595afc65c872203e7247c656d5b00dcd4319985cb3905b251012"
+  },
+  "rtl/minimig/ciaa_ps2keyboard.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/ciaa_ps2keyboard.v",
+    "sha256": "07e86a5503c970bc8f13266c0628fea809e152ae2b4af542fea079715199b987"
+  },
+  "rtl/minimig/ciaa_ps2keyboard_map.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/ciaa_ps2keyboard_map.v",
+    "sha256": "f6f6e4c60cee6401462e9665e5a2e442dcbb37836ec75987b8ad005659228360"
+  },
+  "rtl/minimig/ciab.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/ciab.v",
+    "sha256": "1d9633a483fc4da1c73b7a81c512853c80ca642da689803fc545ef0aaf19628c"
+  },
+  "rtl/minimig/denise.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise.v",
+    "sha256": "9e65f856ad0d776ecb509319337faccbf081281cbec4e34eff9a70e27baf62ee"
+  },
+  "rtl/minimig/denise_bitplane_shifter.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_bitplane_shifter.v",
+    "sha256": "e6155eaf38c203e9bfee4f218d9e826dcff7d15c8829cac74d1076b23b90758c"
+  },
+  "rtl/minimig/denise_bitplanes.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_bitplanes.v",
+    "sha256": "9bd8a2d84cca22aaebd99cfa38c639268de11768c7775f3821f94f8ef97b6930"
+  },
+  "rtl/minimig/denise_collision.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_collision.v",
+    "sha256": "bb03de3c62086c9ebfd4c0dd4f084ef10c96895cc55e1d0a9e335f6bd648e6e5"
+  },
+  "rtl/minimig/denise_colortable.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_colortable.v",
+    "sha256": "0d75cb3bae8c6b510972ac02f4ec7d907644130337c1a6a3debccd9802fe8a2c"
+  },
+  "rtl/minimig/denise_hamgenerator.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_hamgenerator.v",
+    "sha256": "287cbd6d45a0746c8d40e0810462c8747560c777d062d05b3e3d129e8fb8c5f9"
+  },
+  "rtl/minimig/denise_playfields.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_playfields.v",
+    "sha256": "32ebd497784a8152be51ece37336405e89c113e2fd3c73d008f1b1049070bd67"
+  },
+  "rtl/minimig/denise_spritepriority.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_spritepriority.v",
+    "sha256": "d5662f811ef633574e418480d155ae87dc6c8b963f7dccecc784195a8f68f4b4"
+  },
+  "rtl/minimig/denise_sprites.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_sprites.v",
+    "sha256": "a4075ac62f68db02a4a8e08a2b05ebaa781255c2bb06b778f64178f41fa5148c"
+  },
+  "rtl/minimig/denise_sprites_shifter.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/denise_sprites_shifter.v",
+    "sha256": "221f169fb01b39497bbc6d2d426b11b6468fe4a829a3a8bc0724877cbaa1a6e1"
+  },
+  "rtl/minimig/gary.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/gary.v",
+    "sha256": "0a86fb2baecf41f4f3d06b48fdfc9f17426e29cb78b557551b4fa90fdf0991b5"
+  },
+  "rtl/minimig/gayle.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/gayle.v",
+    "sha256": "d0a7138b198cd43fde445e238324b2484b7b0623c28a74e664f5af0d050e324e"
+  },
+  "rtl/minimig/ide.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/ide.v",
+    "sha256": "1df53393e737ed216c4d4d808c033dfd7d66a8abb99eb79b44c7384c8ca3646e"
+  },
+  "rtl/minimig/ide_fifo.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/ide_fifo.v",
+    "sha256": "931d8abd5836cb42fe0dfa2a3324911e5f52ef3e5714f7e897ff7208f7a1d8bc"
+  },
+  "rtl/minimig/minimig.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig.v",
+    "sha256": "9ef6b95ac4d20f3210b8b0b60bc5c237b1fe0db6b3ccf49139a2a0ea26f70f77"
+  },
+  "rtl/minimig/minimig_autoconfig.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_autoconfig.v",
+    "sha256": "684b43b2a3e13dbf77efd2a5d635ac0d852c001197e51e5a849f145f84d47c24"
+  },
+  "rtl/minimig/minimig_autoconfig_rom.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_autoconfig_rom.v",
+    "sha256": "547ecaede05f22e2bf177a7ac1e6e66e53dcc9c277d91e2a73446d058e9fca2e"
+  },
+  "rtl/minimig/minimig_bankmapper.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_bankmapper.v",
+    "sha256": "6fbf581e9412848d42f84ec2c502f9738dcf67f3a00aaf0d4600156b8b97906f"
+  },
+  "rtl/minimig/minimig_control_board.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_control_board.v",
+    "sha256": "0525c85dd8c4799b8cf786537d68189b2b93c5c1fbd0d4a93c7cab2db5c9b82f"
+  },
+  "rtl/minimig/minimig_m68k_bridge.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_m68k_bridge.v",
+    "sha256": "aad476d0b98bf24283720b7abb84dffe447da44149ec15a6b0dcef873d51a7b1"
+  },
+  "rtl/minimig/minimig_sram_bridge.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_sram_bridge.v",
+    "sha256": "3bb3fc8856505036fce9567a756ba17a384611f887beca05c29692a982b0335f"
+  },
+  "rtl/minimig/minimig_syscontrol.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_syscontrol.v",
+    "sha256": "40efcf36eca6e6a31d8c08e08f7a55fdfff64f0ddda7e8917b18834eed5ced53"
+  },
+  "rtl/minimig/minimig_version.vh": {
+    "source": "icepi-zero-minimig/rtl/minimig/minimig_version.vh",
+    "sha256": "9401f7f5a4545747cf5da330b78c22ae8315dedcc60c1f687ea2603a627c61a1"
+  },
+  "rtl/minimig/paula.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula.v",
+    "sha256": "0232d9e700ab8172d919a14d0f838f6f8277dc1a7d3397856a27430b94412b6e"
+  },
+  "rtl/minimig/paula_audio.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_audio.v",
+    "sha256": "640c537fb1c287c44a904616528711f6aae4e9fad73c273ee99f9b47a74d6101"
+  },
+  "rtl/minimig/paula_audio_channel.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_audio_channel.v",
+    "sha256": "ca561bc026a29a78bdcb07cff3da29ad91c77fe89aa55f7d7f0fbe7a658e6b6a"
+  },
+  "rtl/minimig/paula_audio_mixer.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_audio_mixer.v",
+    "sha256": "0075e13c1cc1672f0616636976958e4c83e87f999b3afdc29b8a3eea3a6b95df"
+  },
+  "rtl/minimig/paula_audio_sigmadelta.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_audio_sigmadelta.v",
+    "sha256": "272659efe2da41cb1f1ac2df81331c555492cc6f1eea6be5d45b5759cc271622"
+  },
+  "rtl/minimig/paula_audio_volume.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_audio_volume.v",
+    "sha256": "c48e6ad4cc6806b433a91d229922181531386628ffbcff8b6bd3d1286f2a7d05"
+  },
+  "rtl/minimig/paula_floppy_fifo.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_floppy_fifo.v",
+    "sha256": "eed6ed79975cbc342ace2d6777449a1a401e3293e1479d1cf6c41cc5bbe42940"
+  },
+  "rtl/minimig/paula_intcontroller.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_intcontroller.v",
+    "sha256": "48d06cfcd0e5ba93158a57eec1905ed4166b24b830974e77e9090ec17f24e2f7"
+  },
+  "rtl/minimig/paula_uart.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/paula_uart.v",
+    "sha256": "c40a75ca98a5d92932602d57c5bf923b95a545a1a5b8040fe97cdf5aa78ba5a9"
+  },
+  "rtl/minimig/regs.vh": {
+    "source": "icepi-zero-minimig/rtl/minimig/regs.vh",
+    "sha256": "8e11288ac71400574fc3f3a80f0a6c3c1c57d6445738b5957aea0665683f364b"
+  },
+  "rtl/minimig/rga_decode.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/rga_decode.v",
+    "sha256": "6150580590dbb01a272132a1f5d0e7e7b7aa709243361de13e8462ff868975cc"
+  },
+  "rtl/minimig/scale/frac_interp.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/scale/frac_interp.v",
+    "sha256": "0a41580727325a367af83436418911257f64568c88e90da198ad98317b41cdb6"
+  },
+  "rtl/minimig/scale/pixel_integrate.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/scale/pixel_integrate.v",
+    "sha256": "76b3bb3bbf198a9eb00354a7c126fdaacee179b4823d612a3921908096abcb25"
+  },
+  "rtl/minimig/scale/scandoubler_rgb_integrate.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/scale/scandoubler_rgb_integrate.v",
+    "sha256": "818ab2bf1857645b0cff75edca71ca366fd1aa1b1aac7b55cc57bb15f01ceb31"
+  },
+  "rtl/minimig/scale/unsigned_division.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/scale/unsigned_division.v",
+    "sha256": "afed8fbcb850dc80b8c58b7e57f48b15cc7049052dc0016976af3b1647c603f7"
+  },
+  "rtl/minimig/userio.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/userio.v",
+    "sha256": "c528a09d5c5a50a8b2fab09d97ec895df8172f02ff977dcab48cf83c5e8c5022"
+  },
+  "rtl/minimig/userio_config.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/userio_osd.v",
+    "sha256": "136f3aa8411f856492f12f6f8edec80d18f24baa500f3c67a704f4de83f13d2b"
+  },
+  "rtl/minimig/userio_ps2mouse.v": {
+    "source": "icepi-zero-minimig/rtl/minimig/userio_ps2mouse.v",
+    "sha256": "45f6aab5e6e11b20f065f2521b05ba803becf9358a16b9fa7f87350d872b358d"
+  },
+  "rtl/mistle/amiga_keymap.v": {
+    "source": "NanoMig/src/misc/amiga_keymap.v",
+    "sha256": "037d3f1403832eb91c9b4decbceae9046eb2c2f57bea920552a8e0449a8da777"
+  },
+  "rtl/mistle/flash_dspi.v": {
+    "source": "NanoMig/src/misc/flash_dspi.v",
+    "sha256": "9d93fbb12040206934197831b931267cd6975d46dc3f3d1429ced2cbbaf93ff7"
+  },
+  "rtl/mistle/hid.v": {
+    "source": "NanoMig/src/misc/hid.v",
+    "sha256": "f38c40f5f74394a5d27b0571573d422ab5b46f3c7227aa31d6c4dd43171bcaaf"
+  },
+  "rtl/mistle/mcu_spi.v": {
+    "source": "NanoMig/src/misc/mcu_spi.v",
+    "sha256": "61df0cd2fdc1120a54a7230eedeb3c2f5c4c1dd37c633db720b6fe5685a168f7"
+  },
+  "rtl/mistle/paula_floppy_dma_buf.v": {
+    "source": "NanoMig/src/lattice/paula_floppy_dma_buf.v",
+    "sha256": "1a23c2f9b6e12ec66f58da960b1b3d2e6b226ec1c8b88418bcae1338993009a5"
+  },
+  "rtl/mistle/paula_floppy_sector.v": {
+    "source": "NanoMig/src/minimig-aga/paula_floppy_ebr.v",
+    "sha256": "69c7d3d2e996843e68f6dbd534d5ac7cd261a869cd2fea49301218c48baac3e3"
+  },
+  "rtl/mistle/sd_card.v": {
+    "source": "NanoMig/src/misc/sd_card.v",
+    "sha256": "81f0e3710e21ce2b249c562fe42a6e4c2cf547c2bd9189fbae9b6f3fa31dc863"
+  },
+  "rtl/mistle/sd_rw.v": {
+    "source": "NanoMig/src/misc/sd_rw.v",
+    "sha256": "537b00717b0760ad60bfa39382905fab83e084622ba8d1b4a0ffd4c5388b91f3"
+  },
+  "rtl/mistle/sdcmd_ctrl.v": {
+    "source": "NanoMig/src/misc/sdcmd_ctrl.v",
+    "sha256": "8fc3ad492932f6361b104e731f45f65fd3561dc971a471ff94ef1292db083638"
+  },
+  "rtl/mistle/sector_dpram.v": {
+    "source": "NanoMig/src/lattice/icepi-zero/sector_dpram.v",
+    "sha256": "674e59a48bf6708f28a86b375faaf278d081d7919e87c479b4fcbe70820341f1"
+  },
+  "rtl/mistle/sysctrl.v": {
+    "source": "NanoMig/src/misc/sysctrl.v",
+    "sha256": "1bc9bd11ce13a82e8760511aa5f8e6189e4aa1b4a5becdc5fba44d8c43e3e3a0"
+  },
+  "rtl/rtg/VideoStream.vhd": {
+    "source": "icepi-zero-minimig/rtl/rtg/VideoStream.vhd",
+    "sha256": "a1616c357c2af25a385b179b6cd21724f9a8afa696e6abe35d3ae6b006a87560"
+  },
+  "rtl/rtg/rtg_async_fifo.v": {
+    "source": "icepi-zero-minimig/rtl/rtg/rtg_async_fifo.v",
+    "sha256": "91d695b044757374c5ed2b3ea794e7d94eb5832530870ff9951c666f76d72e37"
+  },
+  "rtl/rtg/rtg_osd.v": {
+    "source": "icepi-zero-minimig/rtl/rtg/rtg_osd.v",
+    "sha256": "37be2705910341ffb8db2634b4677a833cc1831840a22bc4d24f605c09925daf"
+  },
+  "rtl/rtg/rtg_video.v": {
+    "source": "icepi-zero-minimig/rtl/rtg/rtg_video.v",
+    "sha256": "933833acaf262d54e3b3dd5d8d0049454d43afee54e9812a42309089ce9e71e1"
+  },
+  "rtl/sdram/cpu_cache_small.v": {
+    "source": "icepi-zero-minimig/rtl/sdram/cpu_cache_small.v",
+    "sha256": "789190d7b83f5a2e0a4228cc12321f8a7ad5f8f68234c5cfd2489a08f458c40c"
+  },
+  "rtl/sdram/dpram_inf_generic.v": {
+    "source": "icepi-zero-minimig/rtl/sdram/dpram_inf_generic.v",
+    "sha256": "efd443a3f5074594c42509ae61c4333d8fee72ec091e3260fe8bfe7814dff659"
+  },
+  "rtl/sdram/sdram_ctrl.v": {
+    "source": "icepi-zero-minimig/rtl/sdram/sdram_ctrl.v",
+    "sha256": "dfcc029a787631cb5fdc32679e53bdcb67830be803c99e0d82c03343c6ee0d08"
+  },
+  "rtl/soc/TG68K.vhd": {
+    "source": "icepi-zero-minimig/rtl/soc/TG68K.vhd",
+    "sha256": "0d9ccd4ee5bccb36455d045d18f69526a79844d602b0e002b793fa15a09db51c"
+  },
+  "rtl/soc/akiko.v": {
+    "source": "icepi-zero-minimig/rtl/soc/akiko.v",
+    "sha256": "02f7935c2e9ee9191f21162ec071822c09ac7e974eeca6af449fb39b75edb097"
+  },
+  "rtl/soc/minimig_defines.vh": {
+    "source": "icepi-zero-minimig/rtl/soc/minimig_defines.vh",
+    "sha256": "923a7d7e016f626e8ae3dd6e391031fd363e8b09e4932cf00025915b2e19ddf4"
+  },
+  "rtl/soc/minimig_virtual_top.v": {
+    "source": "icepi-zero-minimig/rtl/soc/minimig_virtual_top.v",
+    "sha256": "85731fbff9fa53193ea630e70fa60ec3bd6fe7b0697a6cad4c7c528f1fc77277"
+  },
+  "rtl/tg68k/TG68K_ALU.vhd": {
+    "source": "icepi-zero-minimig/rtl/tg68k/TG68K_ALU.vhd",
+    "sha256": "aaa1fcfc57c39ff2057bba8b12300cea9c07db075591eec3d3781d7a879e7d83"
+  },
+  "rtl/tg68k/TG68K_Pack.vhd": {
+    "source": "icepi-zero-minimig/rtl/tg68k/TG68K_Pack.vhd",
+    "sha256": "b91516d3e0ce53366b26485e56d227025ea93fd4a39ac283d5667c905900ff63"
+  },
+  "rtl/tg68k/TG68KdotC_Kernel.vhd": {
+    "source": "icepi-zero-minimig/rtl/tg68k/TG68KdotC_Kernel.vhd",
+    "sha256": "2b05ced9dc7d67bf3a10cd93daa7a961d173c157cadf7481976ba9528c0f81e9"
+  },
+  "rtl/usb_hid_host/LICENSE": {
+    "source": "icepi-zero-minimig/rtl/usb_hid_host/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "rtl/usb_hid_host/rom/usb_hid_host_rom.mem": {
+    "source": "icepi-zero-minimig/rtl/usb_hid_host/rom/usb_hid_host_rom.mem",
+    "sha256": "5bb70d56cbb19ad6789ea7b308952e78dcad971bec463b3978650acf36fe9126"
+  },
+  "rtl/usb_hid_host/rtl/usb_hid_host.v": {
+    "source": "icepi-zero-minimig/rtl/usb_hid_host/rtl/usb_hid_host.v",
+    "sha256": "1c958f4d73059ccd68f95349bfb0fae80e70b98fbac11149eee3ac61acdd2828"
+  },
+  "rtl/usb_hid_host/rtl/usb_hid_host_dual_rom.v": {
+    "source": "icepi-zero-minimig/rtl/usb_hid_host/rtl/usb_hid_host_dual_rom.v",
+    "sha256": "061488b02c821364bc4f554f85e34da99fce15235e69ead107965ab2088521c5"
+  },
+  "sim/sd_card.cpp": {
+    "source": "NanoMig/sim/sd_card.cpp",
+    "sha256": "3295c919afbee49320bb458a76ed47c8c89145d1af819536248933a8f4566cc8"
+  },
+  "sim/sd_card_config.h": {
+    "source": "NanoMig/sim/sd_card_config.h",
+    "sha256": "b7ca471b9dde6e20e2685d8afb6a70a8798982d1606f06ae3cbb0ac60cffe227"
+  },
+  "sim/sdr_chip_model.v": {
+    "source": "snestang/src/verilator/sdr_chip_model.v",
+    "sha256": "13e6f68bc15a1bbbf46172ef3e7718496c2ee0ec2d36ce4fa9bc20d276ab2038"
+  }
+}

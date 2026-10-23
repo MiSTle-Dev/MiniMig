@@ -1,0 +1,18 @@
+{
+  "cpu": 4,
+  "overclock": 1,
+  "memory": 7,
+  "chipset": 5,
+  "floppy": 4,
+  "ide": 3,
+  "filter": 2,
+  "scanline": 2,
+  "screen": 2,
+  "xoffset": 8,
+  "yoffset": 8,
+  "reset": 1,
+  "osd_enable": 1,
+  "osd_we": 1,
+  "osd_addr": 11,
+  "osd_data": 8
+}

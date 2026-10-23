@@ -1,0 +1,413 @@
+{
+  "note": "Existing synthesis reports; no new builds. Hierarchical counts include children. These snapshots predate the latest menu/audio/autofire edits.",
+  "boards": {
+    "icepi-zero": {
+      "report": "fpga/icepi-zero/Minimig_IcePi-Zero/minimig_icepi-zero_Minimig_IcePi-Zero.areasrr",
+      "modified": "2026-10-23T11:51:23.959234",
+      "modules": {
+        "osd_rtg": {
+          "ORCALUT4": 23,
+          "registers": 27,
+          "CCU2C": 9,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "native_osd": {
+          "ORCALUT4": 106,
+          "registers": 45,
+          "CCU2C": 36,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "virtual_top.storage": {
+          "ORCALUT4": 862,
+          "registers": 481,
+          "CCU2C": 167,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 4,
+          "ALU54B": 2
+        },
+        "virtual_top.minimig.PAULA1.pf1": {
+          "ORCALUT4": 471,
+          "registers": 294,
+          "CCU2C": 83,
+          "EBR": 3,
+          "DPR16X4C": 0,
+          "SPR16X4C": 2,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "virtual_top.minimig.PAULA1.pf1.db1": {
+          "ORCALUT4": 331,
+          "registers": 69,
+          "CCU2C": 22,
+          "EBR": 2,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "virtual_top.minimig.PAULA1.pf1.fd_dma_buf": {
+          "ORCALUT4": 0,
+          "registers": 0,
+          "CCU2C": 0,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion": {
+          "ORCALUT4": 1493,
+          "registers": 1265,
+          "CCU2C": 217,
+          "EBR": 3,
+          "DPR16X4C": 8,
+          "SPR16X4C": 0,
+          "ROM128X1A": 7,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.rom": {
+          "ORCALUT4": 71,
+          "registers": 195,
+          "CCU2C": 47,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.card": {
+          "ORCALUT4": 1125,
+          "registers": 706,
+          "CCU2C": 138,
+          "EBR": 2,
+          "DPR16X4C": 8,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.card.sd_rw": {
+          "ORCALUT4": 709,
+          "registers": 376,
+          "CCU2C": 60,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.card.sd_rw.u_sdcmd_ctrl": {
+          "ORCALUT4": 416,
+          "registers": 130,
+          "CCU2C": 41,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.osd": {
+          "ORCALUT4": 37,
+          "registers": 41,
+          "CCU2C": 12,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.input_events": {
+          "ORCALUT4": 66,
+          "registers": 71,
+          "CCU2C": 0,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 7,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.input_events.keymap": {
+          "ORCALUT4": 0,
+          "registers": 0,
+          "CCU2C": 0,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 7,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.control": {
+          "ORCALUT4": 131,
+          "registers": 143,
+          "CCU2C": 20,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.spi": {
+          "ORCALUT4": 51,
+          "registers": 41,
+          "CCU2C": 0,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "flash_rom": {
+          "ORCALUT4": 38,
+          "registers": 113,
+          "CCU2C": 36,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "flash_reader": {
+          "ORCALUT4": 59,
+          "registers": 97,
+          "CCU2C": 6,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        }
+      }
+    },
+    "icepi-zero-xl": {
+      "report": "fpga/icepi-zero-xl/Minimig_IcePi-Zero-XL/minimig_icepi-zero_Minimig_IcePi-Zero-XL.areasrr",
+      "modified": "2026-10-23T10:36:21.316197",
+      "modules": {
+        "osd_rtg": {
+          "ORCALUT4": 23,
+          "registers": 27,
+          "CCU2C": 9,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "native_osd": {
+          "ORCALUT4": 107,
+          "registers": 45,
+          "CCU2C": 36,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "virtual_top.storage": {
+          "ORCALUT4": 888,
+          "registers": 481,
+          "CCU2C": 167,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 4,
+          "ALU54B": 2
+        },
+        "virtual_top.minimig.PAULA1.pf1": {
+          "ORCALUT4": 473,
+          "registers": 294,
+          "CCU2C": 83,
+          "EBR": 3,
+          "DPR16X4C": 0,
+          "SPR16X4C": 2,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "virtual_top.minimig.PAULA1.pf1.db1": {
+          "ORCALUT4": 329,
+          "registers": 69,
+          "CCU2C": 22,
+          "EBR": 2,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "virtual_top.minimig.PAULA1.pf1.fd_dma_buf": {
+          "ORCALUT4": 0,
+          "registers": 0,
+          "CCU2C": 0,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion": {
+          "ORCALUT4": 1521,
+          "registers": 1266,
+          "CCU2C": 217,
+          "EBR": 3,
+          "DPR16X4C": 8,
+          "SPR16X4C": 0,
+          "ROM128X1A": 7,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.rom": {
+          "ORCALUT4": 86,
+          "registers": 195,
+          "CCU2C": 47,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.card": {
+          "ORCALUT4": 1139,
+          "registers": 707,
+          "CCU2C": 138,
+          "EBR": 2,
+          "DPR16X4C": 8,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.card.sd_rw": {
+          "ORCALUT4": 726,
+          "registers": 376,
+          "CCU2C": 60,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.card.sd_rw.u_sdcmd_ctrl": {
+          "ORCALUT4": 429,
+          "registers": 130,
+          "CCU2C": 41,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.osd": {
+          "ORCALUT4": 37,
+          "registers": 41,
+          "CCU2C": 12,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.input_events": {
+          "ORCALUT4": 65,
+          "registers": 71,
+          "CCU2C": 0,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 7,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.input_events.keymap": {
+          "ORCALUT4": 0,
+          "registers": 0,
+          "CCU2C": 0,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 7,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.control": {
+          "ORCALUT4": 128,
+          "registers": 143,
+          "CCU2C": 20,
+          "EBR": 1,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "companion.spi": {
+          "ORCALUT4": 54,
+          "registers": 41,
+          "CCU2C": 0,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "flash_rom": {
+          "ORCALUT4": 39,
+          "registers": 113,
+          "CCU2C": 36,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        },
+        "flash_reader": {
+          "ORCALUT4": 57,
+          "registers": 97,
+          "CCU2C": 6,
+          "EBR": 0,
+          "DPR16X4C": 0,
+          "SPR16X4C": 0,
+          "ROM128X1A": 0,
+          "MULT18X18D": 0,
+          "ALU54B": 0
+        }
+      }
+    }
+  }
+}
