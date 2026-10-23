@@ -1,0 +1,142 @@
+// timer D
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+
+
+module cia_timerd
+(
+  input   clk,            // clock
+  input clk7_en,
+  input  wr,            // write enable
+  input   reset,           // reset
+  input   tlo,          // timer low byte select
+  input   tme,          // timer mid byte select
+  input  thi,           // timer high byte select
+  input  tcr,          // timer control register
+  input   [7:0] data_in,      // bus data in
+  output   reg [7:0] data_out,    // bus data out
+  input  count,            // count enable
+  output  irq            // intterupt out
+);
+
+  reg    latch_ena;        // timer d output latch enable
+  reg   count_ena;        // timer d count enable
+  reg    crb7;          // bit 7 of control register B
+  reg    [23:0] tod;        // timer d
+  reg    [23:0] alarm;      // alarm
+  reg    [23:0] tod_latch;    // timer d latch
+  reg    count_del;        // delayed count signal for interrupt requesting
+  reg    count_del2;        // delayed count signal for interrupt requesting
+
+// timer D output latch control
+always @(posedge clk, posedge reset)
+  if (reset)
+    latch_ena <= 1'd1;
+  else if (clk7_en && !wr)
+  begin
+    if (thi && !crb7) // if MSB read and ALARM is not selected, hold data for subsequent reads
+      latch_ena <= 1'd0;
+    else if (tlo) // if LSB read, update data every clock
+      latch_ena <= 1'd1;
+  end
+
+always @(posedge clk)
+  if (clk7_en) begin
+    if (latch_ena)
+      tod_latch[23:0] <= tod[23:0];
+  end
+
+// timer D and crb7 read
+always @(*)
+  if (!wr)
+  begin
+    if (thi) // high byte of timer D
+      data_out[7:0] = tod_latch[23:16];
+    else if (tme) // medium byte of timer D (latched)
+      data_out[7:0] = tod_latch[15:8];
+    else if (tlo) // low byte of timer D (latched)
+      data_out[7:0] = tod_latch[7:0];
+    else if (tcr) // bit 7 of crb
+      data_out[7:0] = {crb7,7'b000_0000};
+    else
+      data_out[7:0] = 8'd0;
+  end
+  else
+    data_out[7:0] = 8'd0;
+
+// timer D count enable control
+always @(posedge clk, posedge reset)
+  if (reset)
+    count_ena <= 1'd0; // AMR - experimental fix for 3.1.4 TODA_SAFE problem - on reset disable counting until first access.
+  else if (clk7_en && wr) // AMR && !crb7) // crb7==0 enables writing to TOD counter
+  begin
+    if (thi && !crb7 /* || tme*/) // stop counting
+      count_ena <= 1'd0;
+    else if (tlo || (tcr && !data_in[7])) // write to LSB [or CR with bit 7=0 -- AMR] starts counting again
+      count_ena <= 1'd1;
+  end
+
+// timer D counter
+// AMR - emulate buggy TOD behaviour in Mid counter.
+reg todcarry;
+always @(posedge clk, posedge reset)
+    if (reset) // synchronous reset
+    begin
+      tod[23:0] <= 24'd0;
+    end
+    else if (clk7_en) begin
+      if (wr && !crb7) // crb7==0 enables writing to TOD counter
+      begin
+        if (tlo)
+          tod[7:0] <= data_in[7:0];
+        if (tme)
+          tod[15:8] <= data_in[7:0];
+        if (thi)
+          tod[23:16] <= data_in[7:0];
+      end
+      else if (count_ena && count) begin
+        todcarry <= &tod[11:0];
+        tod[11:0] <= tod[11:0] + 12'd1;
+      end
+      else if (count_ena && count_del)
+        tod[23:12] <= tod[23:12] + {11'b0,todcarry};
+    end
+
+// alarm write
+always @(posedge clk, posedge reset)
+  if (reset) // synchronous reset
+  begin
+    alarm[7:0] <= 8'b1111_1111;
+    alarm[15:8] <= 8'b1111_1111;
+    alarm[23:16] <= 8'b1111_1111;
+  end
+  else if (clk7_en && wr && crb7) // crb7==1 enables writing to ALARM
+  begin
+    if (tlo)
+      alarm[7:0] <= data_in[7:0];
+    if (tme)
+      alarm[15:8] <= data_in[7:0];
+    if (thi)
+      alarm[23:16] <= data_in[7:0];
+  end
+
+// crb7 write
+always @(posedge clk, posedge reset)
+  if (reset)
+    crb7 <= 1'd0;
+  else if (wr && tcr)
+    crb7 <= data_in[7];
+
+// delayed count enable signal
+always @(posedge clk)
+  if (clk7_en) begin
+    count_del <= count & count_ena;
+    count_del2 <= count_del & count_ena;
+  end
+
+// alarm interrupt request
+assign irq = (tod[23:0]==alarm[23:0] && (count_del || count_del2)) ? 1'b1 : 1'b0;
+
+
+endmodule
+
