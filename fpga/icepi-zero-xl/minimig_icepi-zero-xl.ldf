@@ -233,6 +233,9 @@
     <Source name="../../rtl/sdram/sdram_ctrl.v" type="Verilog" type_short="Verilog">
       <Options />
     </Source>
+    <Source name="../../rtl/sdram/sdram_write_queue.v" type="Verilog" type_short="Verilog">
+      <Options />
+    </Source>
     <Source name="../../rtl/lattice/denise_colortable_ram_mf.v" type="Verilog" type_short="Verilog">
       <Options />
     </Source>
