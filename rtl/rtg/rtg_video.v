@@ -101,10 +101,10 @@ end
 
 // TG68K qualifies reg_req for the RTG control/palette windows, including
 // legacy page mirrors. Addresses outside those windows must not assert it.
+reg reg_served;
+
 wire reg_access = reg_req && !reg_served;
 wire reg_write  = reg_access && reg_wr;
-
-reg reg_served;
 
 // $B8010c: read bit0 blank, bit1 IRQ pending, bit2 IRQ enabled,
 // bit3 scan clock active. Write bit0 enable, bit1 acknowledge (W1C).
@@ -304,6 +304,8 @@ reg [ROW_COUNT_BITS-1:0] rows_remaining_bottom;
 reg has_bottom;
 
 reg [5:0] prefill_left;
+// Updated alongside the counter to keep its zero comparison out of arbitration.
+reg prefill_has_work;
 reg [8:0] prefill_words;
 
 wire split_valid = !split_line[10];
@@ -351,7 +353,7 @@ reg top_has_work, bottom_has_work;
 wire top_priority    = row_left_top > 4;
 wire bottom_priority = row_left_bottom > 4;
 
-wire selected_has_work = state == PREFILL_BOTTOM ? prefill_left != 0 : (owner ? bottom_has_work : top_has_work);
+wire selected_has_work = state == PREFILL_BOTTOM ? prefill_has_work : (owner ? bottom_has_work : top_has_work);
 wire selected_extend = state == PREFILL_BOTTOM ? prefill_left > 4 && row_left_bottom > 4 :
                          (owner ? bottom_priority : top_priority);
 
@@ -453,6 +455,7 @@ always @(posedge clk_sys or negedge resetn_sys) begin
     bottom_has_work <= 0;
     has_bottom <= 0;
     prefill_left <= 0;
+    prefill_has_work <= 0;
     prefill_words <= 0;
 
   end else begin
@@ -495,7 +498,10 @@ always @(posedge clk_sys or negedge resetn_sys) begin
           end else begin
             row_left_bottom <= row_left_bottom - 1'b1;
           end
-          if (prefill_left != 0) prefill_left <= prefill_left - 1'b1;
+          if (prefill_left != 0) begin
+            prefill_left <= prefill_left - 1'b1;
+            prefill_has_work <= prefill_left != 1;
+          end
 
         end else begin  // top
           addr_top <= next_addr;
@@ -576,6 +582,7 @@ always @(posedge clk_sys or negedge resetn_sys) begin
             // Even one indexed row meets these targets, including a one-line
             // split section. No short-section accumulator/clamp is required.
             prefill_left <= prefill_limit;
+            prefill_has_work <= prefill_limit != 0;
             prefill_words <= {prefill_limit, 3'd0};
 
             case (prescale[1:0])
@@ -691,8 +698,6 @@ reg horizontal_window, vertical_window;
 wire [1:0] repeat_now = config_sys_repeat;
 wire in_source_window = horizontal_window && vertical_window;
 
-wire source_request = display_req && in_source_window && horizontal_phase == 0;
-
 // Frame request arrives during blanking, one cycle before the first pixel.
 // Arm scanout and initialize window state before any FIFO read is requested.
 wire start_display = frame_request && ready_vid[1] && !reset_top_r && !reset_bottom_r;
@@ -700,6 +705,8 @@ wire start_display = frame_request && ready_vid[1] && !reset_top_r && !reset_bot
 wire display_req = rtg_active && !video_reset_rtg && !reset_top_r && !reset_bottom_r &&
                      pixel_request &&
                      frame_active && !frame_fault;
+
+wire source_request = display_req && in_source_window && horizontal_phase == 0;
 
 wire selected_bottom = scan_bottom;
 
