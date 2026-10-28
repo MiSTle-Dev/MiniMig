@@ -101,11 +101,10 @@ end
 
 // TG68K qualifies reg_req for the RTG control/palette windows, including
 // legacy page mirrors. Addresses outside those windows must not assert it.
-reg reg_served;
 wire reg_access = reg_req && !reg_served;
 wire reg_write  = reg_access && reg_wr;
 
-
+reg reg_served;
 
 // $B8010c: read bit0 blank, bit1 IRQ pending, bit2 IRQ enabled,
 // bit3 scan clock active. Write bit0 enable, bit1 acknowledge (W1C).
@@ -692,14 +691,13 @@ reg horizontal_window, vertical_window;
 wire [1:0] repeat_now = config_sys_repeat;
 wire in_source_window = horizontal_window && vertical_window;
 
-wire display_req;
 wire source_request = display_req && in_source_window && horizontal_phase == 0;
 
 // Frame request arrives during blanking, one cycle before the first pixel.
 // Arm scanout and initialize window state before any FIFO read is requested.
 wire start_display = frame_request && ready_vid[1] && !reset_top_r && !reset_bottom_r;
 
-assign display_req = rtg_active && !video_reset_rtg && !reset_top_r && !reset_bottom_r &&
+wire display_req = rtg_active && !video_reset_rtg && !reset_top_r && !reset_bottom_r &&
                      pixel_request &&
                      frame_active && !frame_fault;
 
