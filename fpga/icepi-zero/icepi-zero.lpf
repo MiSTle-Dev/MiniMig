@@ -292,6 +292,7 @@ MULTICYCLE FROM CLKNET "clk_sys" TO CLKNET "clk_28m" 2X;
 
 BLOCK PATH TO PORT "led[*]";
 
+BLOCK PATH FROM CELL "spi_alt*";
 
 BLOCK PATH FROM CELL "virtual_top/minimig/overclock*";
 BLOCK PATH FROM CELL "virtual_top/minimig/ide_config*";
@@ -320,6 +321,8 @@ BLOCK PATH TO CELL "virtual_top/gen_rtg.rtg/ready_vid[0]";
 
 BLOCK PATH FROM CELL "virtual_top/gen_rtg.rtg/*fifo/rd_gray[*]" TO CELL "virtual_top/gen_rtg.rtg/*fifo/rd_gray_w1[*]";
 BLOCK PATH FROM CELL "virtual_top/gen_rtg.rtg/*fifo/wr_gray[*]" TO CELL "virtual_top/gen_rtg.rtg/*fifo/wr_gray_r1[*]";
+
+BLOCK PATH TO CELL "virtual_top/clk28_rstn_sync*";
 
 BLOCK PATH FROM CELL "virtual_top/minimig/AGNUS1/bc1/interlace_out*" TO CELL "hdmi_inst/*";
 BLOCK PATH FROM CELL "virtual_top/minimig/AGNUS1/bc1/displaypal_out*" TO CELL "hdmi_inst/*";

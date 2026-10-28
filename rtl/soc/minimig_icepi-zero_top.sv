@@ -1,5 +1,10 @@
 // MiniMig/MiSTle for IcePi Zero and Zero XL.
 // Board/video architecture translated from icepi-zero-minimig's VHDL top.
+
+// board type define
+`include "minimig_board.vh"
+`include "minimig_defines.vh"
+
 module minimig_icepizero_top #(
     parameter USB_JOYSTICKS = 0
 ) (
@@ -160,6 +165,9 @@ module minimig_icepizero_top #(
       .ready(flash_ready),
       .quiescent(flash_quiescent)
   );
+  reg spi_alt /* synthesis syn_keep=1 */;
+  always @(posedge clk)
+    spi_alt <= gpio[17];
   wire [7:0] sd_rd, sd_wr, sd_write_data, sd_read_data, image_mounted;
   wire [63:0] image_size;
   wire [31:0] sd_sector;
@@ -175,14 +183,17 @@ module minimig_icepizero_top #(
   wire stereo_mix;
   wire joy_swap;
   wire [6:0] joya_i = {1'b1, gpio[5], gpio[0], gpio[2], gpio[1], gpio[4], gpio[3]} & ~joy0[6:0];
-  wire [6:0] joyb_i = {1'b1, gpio[11], gpio[6], gpio[8], gpio[7], gpio[10], gpio[9]} & ~joy1[6:0];
-  assign gpio[11:0] = 12'bz;
+  wire [6:0] joyb_i = spi_alt ? {1'b1,     1'b1, gpio[6],    1'b1, gpio[7],     1'b1,    1'b1} & ~joy1[6:0] :
+                                {1'b1, gpio[11], gpio[6], gpio[8], gpio[7], gpio[10], gpio[9]} & ~joy1[6:0];
+  assign gpio[8:0] = 9'bz;
+  assign gpio[9] = spi_alt ? spi_dout : 1'bz;
+  assign gpio[11:10] = 2'bz;
   assign gpio[12] = 1'b0;
   assign gpio[15:13] = {led_hdd, led_floppy, led_power};
   assign gpio[16] = usb_tx;
   assign gpio[17] = 1'bz;
   assign gpio[20:18] = 3'bz;
-  assign gpio[21] = spi_dout;
+  assign gpio[21] = spi_alt ? 1'bz : spi_dout;
   assign gpio[22] = irq_n;
   assign gpio[27:23] = 5'bz;
   assign usb_pull_dp = 2'b0;
@@ -208,15 +219,18 @@ module minimig_icepizero_top #(
   assign clk_rtg_5x = auxclks[0];
   assign clk_rtg = auxclks[1];
   assign clk_usb = auxclks[2];
+  wire spi_csn = spi_alt ?  gpio[8] : gpio[18];
+  wire spi_clk = spi_alt ? gpio[11] : gpio[24];
+  wire spi_din = spi_alt ? gpio[10] : gpio[25];
   mistle_companion companion (
       .boot_rom_ready(flash_ready),
       .rom_override(rom_override),
       .clk(clk_28m),
       .reset(companion_reset[2]),
       .host_clk(clk_sys),
-      .spi_csn(gpio[18]),
-      .spi_clk(gpio[24]),
-      .spi_din(gpio[25]),
+      .spi_csn(spi_csn),
+      .spi_clk(spi_clk),
+      .spi_din(spi_din),
       .spi_dout(spi_dout),
       .irq_n(irq_n),
       .buttons({button[1] && gpio[26], button[0] && gpio[19]}),
@@ -298,8 +312,6 @@ module minimig_icepizero_top #(
       .cfg_reset(cfg_reset),
       .cfg_osd_enable(cfg_osd_enable),
 
-
-
       .COMP_JOY_SWAP(joy_swap),
       .COMP_KMS_LEVEL(kms_level),
       .COMP_KMS_TYPE(kms_type),
@@ -336,7 +348,6 @@ module minimig_icepizero_top #(
       .HDMI_RTG_PIXEL_REQUEST(hdmi_rtg_pixel_request),
       .HDMI_RTG_FRAME_REQUEST(hdmi_rtg_frame_request),
       .HDMI_RTG_LINE_PREPARE(hdmi_rtg_line_prepare),
-
 
       .CLK_114(clk_sys),
       .CLK_28(clk_28m),
@@ -394,7 +405,7 @@ module minimig_icepizero_top #(
       .USB_DP(usb_dp),
       .USB_DN(usb_dn)
   );
-  assign led = {led_power, led_floppy, led_hdd, led_usb};
+  assign led = {led_power, led_floppy, led_hdd, spi_alt ? 2'b11 : led_usb};
   wire [31:0] hdmi_audio_sample;
   wire hdmi_audio_sample_en;
   wire [2:0] tmds;

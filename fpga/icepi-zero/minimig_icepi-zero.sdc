@@ -69,6 +69,7 @@ set_multicycle_path -from [get_cells -regexp {virtual_top\.tg68k\..*}] -to [get_
 
 set_false_path -to [get_ports {led[*]}]
 
+set_false_path -from [get_cells {spi_alt*}]
 
 set_false_path -from [get_cells {virtual_top.minimig.overclock*}]
 set_false_path -from [get_cells {virtual_top.minimig.ide_config*}]
@@ -97,6 +98,8 @@ set_false_path -to [get_cells {virtual_top.gen_rtg.rtg.ready_vid[0]}]
 
 set_false_path -from [get_cells {virtual_top.gen_rtg.rtg.*fifo.rd_gray[*]}] -to [get_cells {virtual_top.gen_rtg.rtg.*fifo.rd_gray_w1[*]}]
 set_false_path -from [get_cells {virtual_top.gen_rtg.rtg.*fifo.wr_gray[*]}] -to [get_cells {virtual_top.gen_rtg.rtg.*fifo.wr_gray_r1[*]}]
+
+set_false_path -to [get_cells {virtual_top.clk28_rstn_sync*}]
 
 set_false_path -from [get_cells {virtual_top.minimig.AGNUS1.bc1.interlace_out*}]
 set_false_path -from [get_cells {virtual_top.minimig.AGNUS1.bc1.displaypal_out*}]

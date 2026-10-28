@@ -28,10 +28,7 @@ module sysctrl #(
     output reg [ 1:0] leds,  // two leds can be controlled from the MCU
     output reg [23:0] color, // a 24bit BRG color to e.g. be used to drive the ws2812
 
-
-`ifdef ENABLE_RTC
     output reg [11:0] rtc,  // toggle bit, 3 bit index, 8 bit data
-`endif
 
     // values that can be configured by the user
     output           system_reset,
@@ -114,9 +111,7 @@ module sysctrl #(
       int_ack            <= 8'h00;
       coldboot           <= 1'b1;  // reset is actually the power-on-reset
       sys_int            <= 1'b1;  // coldboot interrupt
-`ifdef ENABLE_RTC
-      rtc <= 12'h000;
-`endif
+      rtc                <= 12'h000;
 
       // OSD value defaults. These should be sane defaults, but the MCU
       // will very likely override these early

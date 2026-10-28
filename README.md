@@ -35,17 +35,29 @@ Connect the USB keyboard, mouse and USB joysticks to Companion's USB host interf
 configuration and filesystem sector translation; the FPGA performs the native SD transfers and Amiga image/IDE work.
 The MCU and its connection must work for SD-backed images to be usable, even when Kickstart boots from SPI flash.
 
-| Signal | IcePi GPIO | Direction relative to FPGA |
-| --- | --- | --- |
-| SPI chip select | GPIO18 | Input |
-| SPI clock | GPIO24 | Input |
-| Companion-to-FPGA data | GPIO25 | Input |
-| FPGA-to-Companion data | GPIO21 | Output |
-| Companion interrupt, active low | GPIO22 | Output |
+GPIO17 selects the SPI wiring: leave it unconnected (internal pull-down) or drive it low for standard wiring;
+drive it high at 3.3 V for alternate wiring. Set the selector before SPI communication starts and keep it fixed
+during operation. The mappings below apply to both Zero and Zero XL; parentheses give physical header pin numbers.
+Alternate wiring follows the standard Raspberry Pi GPIO header SPI0 pinout: CE0 on GPIO8, SCLK on GPIO11,
+MOSI on GPIO10 and MISO on GPIO9.
+
+| Signal | Standard wiring | Alternate wiring | Direction relative to FPGA |
+| --- | --- | --- | --- |
+| SPI chip select, active low | GPIO18 (12) | GPIO8 (24) | Input |
+| SPI clock (SCK) | GPIO24 (18) | GPIO11 (23) | Input |
+| Companion-to-FPGA data (MOSI) | GPIO25 (22) | GPIO10 (19) | Input |
+| FPGA-to-Companion data (MISO) | GPIO21 (40) | GPIO9 (21) | Output |
+| Companion interrupt, active low | GPIO22 (15) | GPIO22 (15) | Output |
+| Wiring selector | GPIO17 (11): low | GPIO17 (11): high | Input |
+
+The unused MISO pin is high impedance: GPIO9 in standard mode, GPIO21 in alternate mode.
 
 SPI uses MODE1. For a hand-wired setup, NanoMig's IcePi guide specifies a **220-ohm series resistor on SCK**.
 Use the carrier schematic or Companion pinout for the MCU end of each connection and connect a common ground.
-GPIO0–11 retain the two physical joystick ports. The native four-bit SD interface is CMD=N16, CLK=P15,
+Standard wiring retains both physical joystick ports on GPIO0–11. Alternate wiring reuses GPIO8–11 for SPI and
+disables those physical inputs on the second joystick port; GPIO6 and GPIO7 remain available, and Companion joystick
+input still works. The first physical joystick port on GPIO0–5 is unchanged.
+The native four-bit SD interface is CMD=N16, CLK=P15,
 DAT0=P14, DAT1=R14, DAT2=M15 and DAT3=M14. Both FPGA variants use this interface.
 
 ### SD card, images and OSD

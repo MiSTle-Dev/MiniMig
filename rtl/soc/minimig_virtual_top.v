@@ -28,10 +28,8 @@
 module minimig_virtual_top #(
 	parameter hostonly = 0,
 
-
 	parameter ram_64meg = 1,
 	parameter usethrottle = 1,
-
 
 	parameter havertg = 1,
 	parameter haveaudio = 1,
@@ -725,17 +723,6 @@ sdram_ctrl #(
 	.ena7WRreg    (tg68_ena7WR      )
 );
 
-
-// SPI signals shared by Minimig and the host controller.
-
-
-
-
-
-
-
-
-
 // Keyboard-related signals
 
 wire	[15:0]	c64_translated_key;
@@ -982,10 +969,20 @@ assign CTRL_TX = 1'b1;
 assign RECONFIG = 1'b0;
 assign IECSERIAL = 1'b1;
 
+(* ASYNC_REG = "TRUE" *)
+reg [1:0] clk28_rstn_sync = 2'b0;
 
+always @(posedge CLK_28 or negedge reset_out) begin
+	if (!reset_out)
+		clk28_rstn_sync <= 2'b0;
+	else
+		clk28_rstn_sync <= {clk28_rstn_sync[0], 1'b1};
+end
+
+wire clk28_rst = !clk28_rstn_sync[1];
 
 sdc_controller storage (
-	.clk(CLK_28), .reset(!sdctl_rst), .amiga_reset(amiga_core_reset || cfg_reset),
+	.clk(CLK_28), .reset(clk28_rst), .amiga_reset(amiga_core_reset || cfg_reset),
 	.image_mounted(SDC_IMAGE_MOUNTED), .image_size(SDC_IMAGE_SIZE),
 	.hdd_cmd_req(hdd_cmd_req), .hdd_dat_req(hdd_dat_req), .hdd_data_in(hdd_data_in),
 	.hdd_metadata(hdd_metadata), .hdd_addr(hdd_addr), .hdd_data_out(hdd_data_out),
@@ -999,12 +996,13 @@ sdc_controller storage (
 );
 
 usb_joysticks #(.ENABLE(haveusbhid)) local_usb (
-	.clk_usb(CLK_USB_IN), .clk(CLK_28), .reset(!sdctl_rst),
+	.clk_usb(CLK_USB_IN), .clk(CLK_28), .reset(clk28_rst),
 	.usb_dp(USB_DP), .usb_dn(USB_DN), .joy0(extjoya), .joy1(extjoyb), .connected(LED_USB)
 );
 
 wire [11:0] merged_joya = {5'b11111, JOYA} & extjoya;
 wire [11:0] merged_joyb = {5'b11111, JOYB} & extjoyb;
+
 assign joysticka = COMP_JOY_SWAP ? merged_joyb : merged_joya;
 assign joystickb = COMP_JOY_SWAP ? merged_joya : merged_joyb;
 
