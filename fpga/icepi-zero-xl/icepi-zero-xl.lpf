@@ -43,6 +43,8 @@ LOCATE COMP "gpio[15]" SITE "N1" ;# 10 (GPIO15)
 IOBUF PORT "gpio[15]" IO_TYPE=LVCMOS33 PULLMODE=DOWN ;
 LOCATE COMP "gpio[16]" SITE "H3" ;# 36 (GPIO16)
 IOBUF PORT "gpio[16]" IO_TYPE=LVCMOS33 PULLMODE=UP ;
+LOCATE COMP "gpio[17]" SITE "R3" ;# 11
+IOBUF PORT "gpio[17]" IO_TYPE=LVCMOS33 PULLMODE=DOWN ;
 LOCATE COMP "gpio[18]" SITE "N4" ;# 12 (GPIO18)
 IOBUF PORT "gpio[18]" IO_TYPE=LVCMOS33 PULLMODE=UP ;
 LOCATE COMP "gpio[19]" SITE "E4" ;# 35 (GPIO19)
@@ -271,8 +273,6 @@ BLOCK PATH FROM CELL "virtual_top/minimig/cpu_config*";
 
 BLOCK PATH FROM CELL "virtual_top/minimig/AGNUS1/bc1/beamcon0*";
 
-MAXDELAY FROM CELL "virtual_top/DVI_*" TO CELL "hdmi_inst/*" 34.96 NS;
-
 BLOCK PATH TO CELL "audio_sync/*sync*";
 BLOCK PATH TO CELL "clock_control/reset_sync*";
 BLOCK PATH TO CELL "hdmi_inst/true_hdmi_output.packet_picker_inst/audio_sample_word_buffer*";
@@ -386,9 +386,6 @@ IOBUF PORT "mspi_hold" IO_TYPE=LVCMOS33 PULLMODE=UP;
 LOCATE COMP "mspi_clk_ts" SITE "D12";
 IOBUF PORT "mspi_clk_ts" IO_TYPE=LVCMOS33 PULLMODE=DOWN;
 
-LOCATE COMP "gpio[17]" SITE "R3";
-IOBUF PORT "gpio[17]" IO_TYPE=LVCMOS33 PULLMODE=DOWN;
-
 # MiSTle OSD/configuration exceptions. See doc/TIMING.md.
 # Only the asynchronous first enable stage is exempt; the second stage stays timed.
 BLOCK PATH TO CELL "osd_rtg/enable_sync[0]";
@@ -411,9 +408,13 @@ BLOCK PATH FROM CELL "companion/control/system_overclock*";
 
 # LPF represents the DCSC output at its fastest (RTG) rate. Native pixels are
 # selected only with the native 28 MHz parent; retain their real setup budget.
+MAXDELAY FROM CELL "native_rgb*" TO CELL "hdmi_inst/*" 34.96 NS;
 MAXDELAY FROM CELL "native_osd/*" TO CELL "hdmi_inst/*" 34.96 NS;
+MAXDELAY FROM CELL "hdmi_inst/*" TO CELL "native_osd/*" 34.96 NS;
 # EBR outputs are ASIC pins, not CELL endpoints in Diamond.
 MAXDELAY FROM ASIC "native_osd/buffer_buffer_0_0" PIN "*" TO CELL "hdmi_inst/*" 34.96 NS;
+# Native frame requests also feed the EBR read-address pins directly.
+MAXDELAY FROM CELL "hdmi_inst/osd_frame_request" TO ASIC "native_osd/buffer_buffer_0_0" PIN "ADA*" 34.96 NS;
 
 # Disk DMA length and these destinations update on the same clk7_en (1 in 4).
 # NanoMig already applies this exception to the blitter. Sprite pointer RAM

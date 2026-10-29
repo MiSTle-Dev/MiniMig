@@ -304,8 +304,6 @@ BLOCK PATH FROM CELL "virtual_top/minimig/cpu_config*";
 
 BLOCK PATH FROM CELL "virtual_top/minimig/AGNUS1/bc1/beamcon0*";
 
-MAXDELAY FROM CELL "virtual_top/DVI_*" TO CELL "hdmi_inst/*" 34.96 NS;
-
 BLOCK PATH TO CELL "audio_sync/*sync*";
 BLOCK PATH TO CELL "clock_control/reset_sync*";
 BLOCK PATH TO CELL "hdmi_inst/true_hdmi_output.packet_picker_inst/audio_sample_word_buffer*";
@@ -441,9 +439,13 @@ BLOCK PATH FROM CELL "companion/control/system_overclock*";
 
 # LPF represents the DCSC output at its fastest (RTG) rate. Native pixels are
 # selected only with the native 28 MHz parent; retain their real setup budget.
+MAXDELAY FROM CELL "native_rgb*" TO CELL "hdmi_inst/*" 34.96 NS;
 MAXDELAY FROM CELL "native_osd/*" TO CELL "hdmi_inst/*" 34.96 NS;
+MAXDELAY FROM CELL "hdmi_inst/*" TO CELL "native_osd/*" 34.96 NS;
 # EBR outputs are ASIC pins, not CELL endpoints in Diamond.
 MAXDELAY FROM ASIC "native_osd/buffer_buffer_0_0" PIN "*" TO CELL "hdmi_inst/*" 34.96 NS;
+# Native frame requests also feed the EBR read-address pins directly.
+MAXDELAY FROM CELL "hdmi_inst/osd_frame_request" TO ASIC "native_osd/buffer_buffer_0_0" PIN "ADA*" 34.96 NS;
 
 # Disk DMA length and these destinations update on the same clk7_en (1 in 4).
 # NanoMig already applies this exception to the blitter. Sprite pointer RAM

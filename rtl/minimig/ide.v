@@ -226,7 +226,9 @@ wire        sector_count_dec_out; // decrease sector counter (writes)
 
 always @(posedge clk)
 	if (clk_en) begin
-		if (hwr && sel_tfr && address_in == 3'b010) begin // sector count register loaded by the host
+		if (reset)
+			sector_count <= 0;
+		else if (hwr && sel_tfr && address_in == 3'b010) begin // sector count register loaded by the host
 			sector_count <= {1'b0, data_in[15:8]};
 			if (data_in[15:8] == 0) sector_count <= 9'd256;
 		end else if (sector_count_dec_in || sector_count_dec_out)
@@ -238,9 +240,15 @@ reg wr_old;
 reg sel_fifo_old;
 always @(posedge clk)
 	if (clk_en) begin
-		rd_old <= rd;
-		wr_old <= hwr & lwr;
-		sel_fifo_old <= sel_fifo;
+		if (reset) begin
+			rd_old <= 0;
+			wr_old <= 0;
+			sel_fifo_old <= 0;
+		end else begin
+			rd_old <= rd;
+			wr_old <= hwr & lwr;
+			sel_fifo_old <= sel_fifo;
+		end
 	end
 
 assign sector_count_dec_in  = pio_in & fifo_last_out & sel_fifo_old & ~rd & rd_old & packet_state == PACKET_IDLE;
@@ -319,6 +327,7 @@ always @(posedge clk)
 		drq_d <= drq;
 
 		if (reset) begin
+			drq_d <= GND;
 			intreq[0] <= GND;
 			intreq[1] <= GND;
 			block_mark <= GND;

@@ -1,153 +1,101 @@
-/*
-    osd_u8g2.v
- 
-    on-screen-display using a memory layout that matches the 
-    one of 128x64 OLED displays and is thus supported by u8g2
-  */
-
+// Native 128x64 u8g2 bitmap, doubled in both axes and centered in regular PAL.
 module mistle_native_osd (
-    input clk,
-    input reset,
+  input clk,
+  input reset,
 
-    input enabled,
-    input write_en,
-    input [10:0] write_addr,
-    input [7:0] write_data,
+  input enabled,
+  input write_en,
+  input [10:0] write_addr,
+  input [7:0] write_data,
 
-    input       hs,
-    input       vs,
-    input [7:0] r_in,
-    input [7:0] g_in,
-    input [7:0] b_in,
+  input pixel_request,
+  input frame_request,
+  input [7:0] r_in,
+  input [7:0] g_in,
+  input [7:0] b_in,
 
-    output [7:0] r_out,
-    output [7:0] g_out,
-    output [7:0] b_out
+  output [7:0] r_out,
+  output [7:0] g_out,
+  output [7:0] b_out
 );
 
-  // the OSD is inserted behind the scan doubler and thus deals with
-  // the higher pixel clock and twice the lines
-  // The same HS/VS stream reaches video_analyzer (up to 2047 pixels/line).
-  localparam HCNT_BITS = 11;
-  localparam VCNT_BITS = 10;
+  localparam WIDTH = 256;
+  localparam HEIGHT = 128;
+  localparam BORDER = 4;
+  localparam SHADOW = 8;
+  // Requests cover the bitmap, border and shadow: 272x144 pixels.
+  reg [8:0] column;
+  reg [7:0] row;
+  reg pixel_request_d;
+  reg frame_valid;
+  reg [2:0] window_d, window;
 
-  // OSD is enabled and visible
+  wire [8:0] request_column = frame_request ? 9'd0 : column;
+  wire [7:0] request_row = frame_request ? 8'd0 : row;
+  wire signed [9:0] hpos = $signed({1'b0, request_column}) - BORDER;
+  wire signed [8:0] vpos = $signed({1'b0, request_row}) - BORDER;
 
+  wire active = hpos >= -BORDER && hpos < WIDTH + BORDER &&
+                vpos >= -BORDER && vpos < HEIGHT + BORDER;
+  wire tactive = hpos >= 0 && hpos < WIDTH && vpos >= 0 && vpos < HEIGHT;
 
-  // -------------------------- OSD painting -------------------------------
-
-  reg vsD, hsD;
-  reg [HCNT_BITS-1:0] hcnt;  // signal ranges 0..1023
-  reg [HCNT_BITS-1:0] scr_width;
-  reg [VCNT_BITS-1:0] vcnt;  // signal ranges 0..626
-  reg [VCNT_BITS-1:0] scr_height;
-
-  // OSD is active on current pixel, the shadow is active or the text area is active
-  reg active, tactive;
-
-  // disabling the shadow saves some LUTs
 `ifndef OSD_NO_SHADOW
-  reg sactive;
+  wire sactive = hpos >= -BORDER + SHADOW && hpos < WIDTH + BORDER + SHADOW &&
+                 vpos >= -BORDER + SHADOW && vpos < HEIGHT + BORDER + SHADOW;
 `else
   wire sactive = 1'b0;
 `endif
 
-  wire       osd_pix;
-  wire [7:0] osd_pix_col;
-
-  // background shines through less where "shadow" is active
-  wire [7:0] osd_r = (tactive && osd_pix) ? osd_pix_col : sactive ? {4'b0000, r_in[7:4]} : {3'b000, r_in[7:3]};
-  wire [7:0] osd_g = (tactive && osd_pix) ? osd_pix_col : sactive ? {4'b0000, g_in[7:4]} : {3'b000, g_in[7:3]};
-  wire [7:0] osd_b = (tactive && osd_pix) ? osd_pix_col : sactive ? {4'b0100, b_in[7:4]} : {3'b010, b_in[7:3]};
-
-  // draw active osd, add some shadow to those parts outside osd
-  // that are covered by shadow
-  assign r_out = !enabled ? r_in : active ? osd_r : sactive ? {1'b0, r_in[7:1]} : r_in;
-  assign g_out = !enabled ? g_in : active ? osd_g : sactive ? {1'b0, g_in[7:1]} : g_in;
-  assign b_out = !enabled ? b_in : active ? osd_b : sactive ? {1'b0, b_in[7:1]} : b_in;
-
-  `define BORDER 2
-  `define SHADOW 4
-  `define SCALE 2
-  `define WIDTH 16   // OSD width in 8 pixel wide characters
-  `define HEIGHT 8   // OSD height in 8 pixel tall characters
-
-  // make sure OSD is centered
-  wire [HCNT_BITS-1:0] hstart = {1'b0, scr_width[HCNT_BITS-1:1]} - 8 * `WIDTH * `SCALE / 2;
-  wire [VCNT_BITS-1:0] vstart = {1'b0, scr_height[VCNT_BITS-1:1]} - 8 * `HEIGHT * `SCALE / 2;
-
-  // Share one position subtraction per axis between the OSD windows and
-  // the bitmap address calculation. Window limits are constant offsets.
-  wire signed [HCNT_BITS:0] hpos = $signed({1'b0, hcnt}) - $signed({1'b0, hstart});
-  wire signed [VCNT_BITS:0] vpos = $signed({1'b0, vcnt}) - $signed({1'b0, vstart});
-
-  always @(posedge clk) begin
-    // entire OSD area incl border
-    active <= hpos >= -(`SCALE*`BORDER+1) &&
-             hpos < `SCALE*`BORDER+8*`WIDTH*`SCALE-1 &&
-             vpos >= -(`SCALE*`BORDER) &&
-             vpos < `SCALE*`BORDER+8*`HEIGHT*`SCALE;
-
-    // text area of OSD
-    tactive <= hpos >= -1 && hpos < 8 * `WIDTH * `SCALE - 1 && vpos >= 0 && vpos < 8 * `HEIGHT * `SCALE;
-
-`ifndef OSD_NO_SHADOW
-    // shadow area of OSD
-    sactive <= hpos >= -`SCALE*`BORDER+`SCALE*`SHADOW-1 &&
-              hpos < `SCALE*`BORDER+`SCALE*`SHADOW+8*`WIDTH*`SCALE-1 &&
-              vpos >= -`SCALE*`BORDER+`SCALE*`SHADOW &&
-              vpos < `SCALE*`BORDER+`SCALE*`SHADOW+8*`HEIGHT*`SCALE;
-`endif
-  end
-
-  // 1024 bytes = 8192 pixels = 128 x 64 pixels
-  reg [7:0] buffer[1024];
-
-  // The Companion decoder doubles columns for RTG's 256-column bitmap.
-  // Native u8g2 rendering already scales by two, so store each even write once.
-  always @(posedge clk) if (write_en && !write_addr[0]) buffer[write_addr[10:1]] <= write_data;
-
-  wire [7:0] hpix = hpos[7:0];  // horizontal pixel position inside OSD
-  wire [7:0] hpixD = hpix + 1;  // latch byte one pixel in advance
-  wire [6:0] vpix = vpos[6:0];  // vertical pixel position inside OSD
-
-  reg  [7:0] buffer_byte;
-  assign osd_pix = buffer_byte[vpix[3:1]];
-  always @(posedge clk) buffer_byte <= buffer[{vpix[6:4], hpixD[7:1]}];
-
-  assign osd_pix_col = 8'd255;
-
-  // -------------------------- video signal analysis -------------------------
-
-  // analyze video timing to determine center of screen
   always @(posedge clk) begin
     if (reset) begin
-      hsD <= 1;
-      vsD <= 1;
-      hcnt <= 0;
-      vcnt <= 0;
-      scr_width <= 1820;
-      scr_height <= 312;
+      pixel_request_d <= 0;
+      frame_valid <= 0;
+      window_d <= 0;
+      window <= 0;
     end else begin
-      // ---- hsync processing -----
-      hsD <= hs;
-
-      // end of hsync, rising edge
-      if (hs && !hsD) begin
-        scr_width <= hcnt;
-        hcnt <= 0;
-      end else hcnt <= hcnt + 12'd1;
-
-      if (hs && !hsD) begin
-        // ---- vsync processing -----
-        vsD <= vs;
-        // begin of vsync, falling edge
-        if (!vs && vsD) begin
-          scr_height <= vcnt;
-          vcnt <= 0;
-        end else vcnt <= vcnt + 10'd1;
-      end
+      pixel_request_d <= pixel_request;
+      column <= pixel_request ? request_column + 9'd1 : 9'd0;
+      if (frame_request) begin
+        row <= 0;
+        frame_valid <= 1;
+      end else if (pixel_request_d && !pixel_request)
+        row <= row + 1'b1;
+      window_d <= {3{pixel_request && (frame_valid || frame_request)}} & {active, tactive, sactive};
+      window <= window_d;
     end
   end
+
+  // The Companion decoder doubles columns for RTG's 256-column bitmap.
+  // Native rendering already scales by two, so store each even write once.
+  reg [7:0] buffer[1024];
+
+  always @(posedge clk)
+    if (write_en && !write_addr[0]) buffer[write_addr[10:1]] <= write_data;
+
+  wire [7:0] hpix = hpos[7:0];
+  wire [6:0] vpix = vpos[6:0];
+  reg [7:0] buffer_byte;
+  reg [2:0] bit_index;
+  reg osd_pix;
+
+  // Match the two-cycle request lead to the RAM read and bitmap-bit selection.
+  always @(posedge clk) begin
+    buffer_byte <= buffer[{vpix[6:4], hpix[7:1]}];
+    bit_index <= vpix[3:1];
+    osd_pix <= buffer_byte[bit_index];
+  end
+
+  wire [7:0] osd_r = (window[1] && osd_pix) ? 8'hff :
+                     window[0] ? {4'b0000, r_in[7:4]} : {3'b000, r_in[7:3]};
+  wire [7:0] osd_g = (window[1] && osd_pix) ? 8'hff :
+                     window[0] ? {4'b0000, g_in[7:4]} : {3'b000, g_in[7:3]};
+  wire [7:0] osd_b = (window[1] && osd_pix) ? 8'hff :
+                     window[0] ? {4'b0100, b_in[7:4]} : {3'b010, b_in[7:3]};
+
+  wire visible = enabled && !reset;
+
+  assign r_out = !visible ? r_in : window[2] ? osd_r : window[0] ? {1'b0, r_in[7:1]} : r_in;
+  assign g_out = !visible ? g_in : window[2] ? osd_g : window[0] ? {1'b0, g_in[7:1]} : g_in;
+  assign b_out = !visible ? b_in : window[2] ? osd_b : window[0] ? {1'b0, b_in[7:1]} : b_in;
 
 endmodule

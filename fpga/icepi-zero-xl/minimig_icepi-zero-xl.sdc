@@ -159,6 +159,8 @@ set_false_path -from [get_cells {companion.control.system_overclock*}]
 # Native bitmap pixels remain timed to the selected native parent. The
 # asynchronous clock groups above exclude the inactive RTG parent in synthesis.
 set_max_delay 34.96 -from [get_cells {native_osd.*}] -to [get_cells {hdmi_inst.*}]
+set_max_delay 34.96 -from [get_cells {hdmi_inst.*}] -to [get_cells {native_osd.*}]
+
 set_multicycle_path -from [get_cells {virtual_top.minimig.PAULA1.pf1.dsklen*}] -to [get_cells {virtual_top.minimig.AGNUS1.bl1.*}] -setup 4
 set_multicycle_path -from [get_cells {virtual_top.minimig.PAULA1.pf1.dsklen*}] -to [get_cells {virtual_top.minimig.AGNUS1.bl1.*}] -hold 3
 set_multicycle_path -from [get_cells {virtual_top.minimig.PAULA1.pf1.dsklen*}] -through [get_nets {virtual_top.minimig.AGNUS1.spr1.sprpth_in*}] -setup 4

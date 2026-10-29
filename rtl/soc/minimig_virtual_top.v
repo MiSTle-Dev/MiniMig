@@ -746,6 +746,7 @@ reg		amiga_key_stb_r;
 
 // Companion holds each byte and toggles its event level. The stable mouse
 // consumer samples a strobe on clk7_en, unlike CIA keyboard's toggle consumer.
+wire amiga_core_reset;
 reg mouse_event_seen = 1'b0;
 always @(posedge CLK_28) begin
 	if (!reset_out || amiga_core_reset || clk7_en)
@@ -772,7 +773,6 @@ wire hdd_cmd_req, hdd_dat_req;
 wire [15:0] hdd_data_in, hdd_data_out, hdd_metadata;
 wire [2:0] hdd_addr;
 wire hdd_wr, hdd_status_wr, hdd_data_wr, hdd_data_rd;
-wire amiga_core_reset;
 //// minimig top ////
 `ifdef HOSTONLY
 
@@ -960,10 +960,12 @@ assign host_interrupt = 1'b0;
 assign ROM_HOST_ACK = host_ramack;
 assign ROM_MEMORY_READY = reset_out;
 assign aud_ena_host = 1'b0;
+
 assign amigahost_addr = 0;
 assign amigahost_req = 0;
 assign amigahost_wr = 0;
 assign amigahost_d = 0;
+
 assign rtc = COMP_RTC;
 assign CTRL_TX = 1'b1;
 assign RECONFIG = 1'b0;
@@ -1024,15 +1026,15 @@ wire vga_window = 1'b1;
 
 assign vga_stb = ~(|vga_strobe_ctr);
 
-always @(negedge CLK_28) begin
-	DVI_VS <= VGA_VS_INT ^ (vsyncpol & !selcsync);
-	DVI_HS <= VGA_HS_INT ^ (hsyncpol & !selcsync);
-	DVI_R  <= VGA_R_INT;
-	DVI_G  <= VGA_G_INT;
-	DVI_B  <= VGA_B_INT;
-	DVI_DE <= ~blank_amiga;
+always @(*) begin
+	DVI_VS = VGA_VS_INT ^ (vsyncpol & !selcsync);
+	DVI_HS = VGA_HS_INT ^ (hsyncpol & !selcsync);
+	DVI_R  = VGA_R_INT;
+	DVI_G  = VGA_G_INT;
+	DVI_B  = VGA_B_INT;
+	DVI_DE = ~blank_amiga;
 
-	DVI_STROBE <= vga_stb;
+	DVI_STROBE = vga_stb;
 end
 
 endmodule

@@ -7,4 +7,4 @@
 // Use combinational ECP5 DSPs for the blitter barrel shifters.
 `define MINIMIG_ECP5_BLITTER_DSP
 
-`define ENABLE_RTC
+// `define ENABLE_RTC

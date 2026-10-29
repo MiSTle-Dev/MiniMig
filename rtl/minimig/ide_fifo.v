@@ -28,8 +28,13 @@ reg          wr_old;
 
 always @(posedge clk)
 	if (clk_en) begin
-		rd_old <= rd;
-		wr_old <= wr;
+		if (reset) begin
+			rd_old <= 0;
+			wr_old <= 0;
+		end else begin
+			rd_old <= rd;
+			wr_old <= wr;
+		end
 	end
 
 // main fifo memory (implemented using synchronous block ram)
@@ -66,8 +71,12 @@ assign empty_rd = inptr==outptr ? 1'b1 : 1'b0;
 
 // after writting empty fifo the empty flag is delayed by one clock to handle ram write delay
 always @(posedge clk)
-	if (clk_en)
-		empty_wr <= empty_rd;
+	if (clk_en) begin
+		if (reset)
+			empty_wr <= 1;
+		else
+			empty_wr <= empty_rd;
+	end
 
 assign empty = empty_rd | empty_wr;
 

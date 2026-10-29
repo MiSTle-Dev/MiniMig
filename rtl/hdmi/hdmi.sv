@@ -69,7 +69,7 @@ module hdmi
     output reg frame_start_toggle,
     output reg vblank_start_toggle,
 
-    // Registered requests, consumed synchronously by the RTG PLL domain.
+    // Registered requests in the selected pixel-clock domain.
     output reg rtg_pixel_request,
     output reg rtg_frame_request,
     output reg rtg_line_prepare,
@@ -160,14 +160,16 @@ wire  [9:0] scan_y = scan_next_line ? (cy == (RTG_FRAME_HEIGHT - 1) ? 10'd0 : cy
 // Aligned 256x128 window: no full-width range comparisons or subtraction.
 wire osd_window = (scan_x[10:7] == 4'd5 || scan_x[10:7] == 4'd6) && scan_y[9:7] == 3'd4;
 
+// Include the native bitmap, four-pixel border and eight-pixel shadow.
+wire [10:0] native_osd_x = cx + REGISTERED_LEAD;
+wire native_osd_window = native_osd_x >= 11'd228 && native_osd_x < 11'd500 &&
+                         cy >= 10'd220 && cy < 10'd364;
+
 always @(posedge clk_pixel) begin
     if (reset || !rtg_en) begin
         rtg_pixel_request <= 0;
         rtg_frame_request <= 0;
         rtg_line_prepare  <= 0;
-
-        osd_pixel_request <= 0;
-        osd_frame_request <= 0;
 
     end else begin
         rtg_pixel_request <= (cx < SCAN_BLANK || scan_next_line) && scan_y < RTG_SCREEN_HEIGHT;
@@ -175,10 +177,18 @@ always @(posedge clk_pixel) begin
         rtg_frame_request <= cx == (SCAN_WRAP - 1) && cy == (RTG_FRAME_HEIGHT - 1);
         // First horizontal-blank request: prepare the NEXT row while idle.
         rtg_line_prepare <= cx == SCAN_BLANK;
+    end
 
+    if (reset) begin
+        osd_pixel_request <= 0;
+        osd_frame_request <= 0;
+    end else if (rtg_en) begin
         // X=640..895, Y=512..639: 128 pixels from right and bottom.
         osd_pixel_request <= osd_window;
         osd_frame_request <= osd_window && scan_x[7:0] == 8'd128 && scan_y[6:0] == 0;
+    end else begin
+        osd_pixel_request <= native_osd_window;
+        osd_frame_request <= native_osd_x == 11'd228 && cy == 10'd220;
     end
 end
 

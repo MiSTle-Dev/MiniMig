@@ -92,6 +92,18 @@ module sdc_controller #(
   assign fdc_done = owner == OWN_FDC && sd_done;
   assign fdc_strobe = owner == OWN_FDC && sd_strobe;
 
+  localparam IDLE=0, GET_REGS=1, DECODE=2, STATUS=3, STATUS_GAP=4,
+    SECTOR_START=5, SECTOR_WAIT=6, READ_ADDR=7, READ_BYTE=8, READ_WORD=9,
+    FIFO_WRITE=10, FIFO_GAP=11, WAIT_READ=12, WAIT_WRITE=13, FIFO_CAPTURE=14,
+    FIFO_POP=15, FIFO_POP_GAP=16, BUFFER_LOW=17, BUFFER_HIGH=18,
+    WRITE_COMPLETE=19, ERROR_REG=20, ERROR_GAP=21, IDENTIFY=22,
+    IDENTIFY_GAP=23, PROBE_START=24, PROBE_WAIT=25, PROBE_PARSE=26,
+    PROBE_GAP=27, PROBE_FINISH=28, COMPLETE=29, READ_LOW=30;
+  reg [5:0] state;
+  reg [5:0] after_status;
+  wire live_command = hdd_metadata[9] && hdd_metadata[15:10] == generation && hdd_metadata[8] == 0;
+  wire cancelled = amiga_reset || !live_command;
+
   wire sector_buffer_write = owner == OWN_HDD && transport_started && sd_strobe && !sector_write;
   wire buffer_write = sector_buffer_write || state == BUFFER_LOW || state == BUFFER_HIGH;
   wire [8:0] buffer_write_addr = sector_buffer_write ? sd_addr : buffer_addr;
@@ -110,7 +122,6 @@ module sdc_controller #(
       transport_started <= 0;
       selected_rd <= 0;
       selected_wr <= 0;
-      selected_sector <= 0;
       transport_turn <= 0;
     end else if (owner == OWN_IDLE) begin
       selected_rd <= 0;
@@ -148,17 +159,6 @@ module sdc_controller #(
     end
   end
 
-  localparam IDLE=0, GET_REGS=1, DECODE=2, STATUS=3, STATUS_GAP=4,
-    SECTOR_START=5, SECTOR_WAIT=6, READ_ADDR=7, READ_BYTE=8, READ_WORD=9,
-    FIFO_WRITE=10, FIFO_GAP=11, WAIT_READ=12, WAIT_WRITE=13, FIFO_CAPTURE=14,
-    FIFO_POP=15, FIFO_POP_GAP=16, BUFFER_LOW=17, BUFFER_HIGH=18,
-    WRITE_COMPLETE=19, ERROR_REG=20, ERROR_GAP=21, IDENTIFY=22,
-    IDENTIFY_GAP=23, PROBE_START=24, PROBE_WAIT=25, PROBE_PARSE=26,
-    PROBE_GAP=27, PROBE_FINISH=28, COMPLETE=29, READ_LOW=30;
-  reg [5:0] state;
-  reg [5:0] after_status;
-  wire live_command = hdd_metadata[9] && hdd_metadata[15:10] == generation && hdd_metadata[8] == 0;
-  wire cancelled = amiga_reset || !live_command;
   wire service_state = state != IDLE && state < PROBE_START || state == COMPLETE || state == READ_LOW;
   wire mount_event = |image_mounted[5:4];
   wire valid_geometry = rdb_signature == "RDSK" && parsed_heads != 0 && parsed_heads <= 16 &&
@@ -233,32 +233,14 @@ module sdc_controller #(
   integer drive;
   always @(posedge clk) begin
     if (reset) begin
+      // Reset validity and control only. Transaction payloads, indices and parsed
+      // geometry are overwritten by the FSM before their consuming state.
       mounted <= 0;
       examined <= 0;
       present <= 0;
       state <= IDLE;
       sector_request <= 0;
-      sector_write <= 0;
       timer <= 0;
-      word_index <= 0;
-      active_drive <= 0;
-      generation <= 0;
-      buffer_addr <= 0;
-      fifo_word <= 0;
-      lba <= 0;
-      remaining <= 0;
-      block_left <= 0;
-      block_size <= 0;
-      writing <= 0;
-      command <= 0;
-      status_value <= 0;
-      after_status <= IDLE;
-      error_code <= 0;
-      request_sector <= 0;
-      rdb_signature <= 0;
-      parsed_cylinders <= 0;
-      parsed_heads <= 0;
-      parsed_sectors <= 0;
       for (drive = 0; drive < 2; drive = drive + 1) begin
         multiple[drive] <= 0;
       end
@@ -520,6 +502,8 @@ module sdc_controller #(
         sector_request <= 0;
       end
       if (timer == TIMEOUT_CYCLES && state != IDLE) begin
+        // Consume the timeout so ERROR_REG -> ERROR_GAP -> STATUS can finish.
+        timer <= 0;
         sector_request <= 0;
         if (service_state && !cancelled) begin
           error_code <= 8'h40;

@@ -137,7 +137,7 @@ module minimig_icepizero_top #(
   flash_dspi_reader flash_reader (
       .clk(clk_sys),
       .flash_clk(clk_28m),
-      .reset(!rom_memory_ready || !pll_locked),
+      .reset(!rom_memory_ready),
       .ready(flash_reader_ready),
       .address(flash_address),
       .cs(flash_cs),
@@ -151,7 +151,7 @@ module minimig_icepizero_top #(
   );
   flash_boot flash_rom (
       .clk(clk_sys),
-      .reset(!rom_memory_ready || !pll_locked),
+      .reset(!rom_memory_ready),
       .abort(flash_abort_sync[1]),
       .flash_ready(flash_reader_ready),
       .flash_busy(flash_busy),
@@ -200,10 +200,11 @@ module minimig_icepizero_top #(
   assign usb_pull_dn = 2'b0;
   assign amiga_reset_n = button[0] && gpio[19] && !cfg_reset;
   wire [5:0] db9 = ~{gpio[5], gpio[0], gpio[2], gpio[1], gpio[4], gpio[3]};
-  (* ASYNC_REG = "TRUE" *)reg  [2:0] companion_reset = 3'b111;
+  (* ASYNC_REG = "TRUE" *)reg  [2:0] companion_reset_sync = 3'b111;
   always @(posedge clk_28m or negedge pll_locked)
-    if (!pll_locked) companion_reset <= 3'b111;
-    else companion_reset <= {companion_reset[1:0], 1'b0};
+    if (!pll_locked) companion_reset_sync <= 3'b111;
+    else companion_reset_sync <= {companion_reset_sync[1:0], 1'b0};
+  wire companion_reset = companion_reset_sync[2];
   ODDRX1F ddr_sdramclk (
       .D0(1'b0),
       .D1(1'b1),
@@ -226,7 +227,7 @@ module minimig_icepizero_top #(
       .boot_rom_ready(flash_ready),
       .rom_override(rom_override),
       .clk(clk_28m),
-      .reset(companion_reset[2]),
+      .reset(companion_reset),
       .host_clk(clk_sys),
       .spi_csn(spi_csn),
       .spi_clk(spi_clk),
@@ -412,16 +413,15 @@ module minimig_icepizero_top #(
   wire tmds_clock;
   wire [23:0] native_rgb;
   wire [23:0] rtg_rgb_overlay;
-  wire [23:0] rgb = rtg_active ? rtg_rgb_overlay : native_rgb;
   mistle_native_osd native_osd (
       .clk(clk_28m),
-      .reset(companion_reset[2]),
+      .reset(companion_reset),
       .enabled(cfg_osd_enable),
       .write_en(cfg_osd_we),
       .write_addr(cfg_osd_addr),
       .write_data(cfg_osd_data),
-      .hs(dvi_hsync),
-      .vs(dvi_vsync),
+      .pixel_request(hdmi_osd_pixel_request),
+      .frame_request(hdmi_osd_frame_request),
       .r_in(dvi_red),
       .g_in(dvi_green),
       .b_in(dvi_blue),
@@ -429,6 +429,9 @@ module minimig_icepizero_top #(
       .g_out(native_rgb[15:8]),
       .b_out(native_rgb[7:0])
   );
+  reg [23:0] native_rgb_r;
+  always @(negedge clk_28m)
+    native_rgb_r <= native_rgb;
   wire rtg_overlay, rtg_overlay_pixel;
   (* ASYNC_REG = "TRUE" *) reg [1:0] osd_reset_sync = 2'b0;
   always @(posedge clk_rtg or negedge auxpll_locked)
@@ -448,13 +451,12 @@ module minimig_icepizero_top #(
       .overlay(rtg_overlay),
       .pixel(rtg_overlay_pixel)
   );
-  reg [23:0] rtg_video;
+  reg [23:0] rtg_rgb_r;
   always @(negedge clk_rtg)
-    rtg_video <= rtg_overlay ?
+    rtg_rgb_r <= rtg_overlay ?
         {rtg_overlay_pixel ? 2'b11 : 2'b00, rtg_rgb[23:18],
          rtg_overlay_pixel ? 2'b11 : 2'b00, rtg_rgb[15:10],
          rtg_overlay_pixel ? 2'b11 : 2'b10, rtg_rgb[7:2]} : rtg_rgb;
-  assign rtg_rgb_overlay = rtg_video;
   wire clksel_n = !rtg_active;
   video_clock_control clock_control (
       .clk(clk),
@@ -497,6 +499,13 @@ module minimig_icepizero_top #(
       .sample_en(hdmi_audio_sample_en),
       .sample(hdmi_audio_sample)
   );
+  reg dvi_hsync_r;
+  reg dvi_vsync_r;
+  always @(negedge clk_28m) begin
+    dvi_hsync_r <= dvi_hsync;
+    dvi_vsync_r <= dvi_vsync;
+  end
+  wire [23:0] rgb = rtg_active ? rtg_rgb_r : native_rgb_r;
   hdmi #(
       .VIDEO_RATE(28571400),
       .RTG_VIDEO_RATE(RTG_PIXEL_HZ),
@@ -529,8 +538,8 @@ module minimig_icepizero_top #(
       .long_frame(long_frame),
       .interlace(interlace),
       .screen_mode(video_mode),
-      .vsync_in(dvi_vsync),
-      .hsync_in(dvi_hsync),
+      .vsync_in(dvi_vsync_r),
+      .hsync_in(dvi_hsync_r),
       .offset_x(video_xoffset),
       .offset_y(video_yoffset[6:0]),
       .rgb(rgb),
