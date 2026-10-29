@@ -60,7 +60,8 @@ for board in ('icepi-zero', 'icepi-zero-xl'):
       entries.append((source[1], destination[1]))
   print(f'  {len(entries)} detailed failing entries (report limit applies; endpoint pairs may repeat)')
   for label, predicate in (
-      ('menu screen mode', lambda a, b: 'USERIO1/control/screen_mode' in a),
+      ('menu screen mode', lambda a, b: 'companion/control/system_video_screen' in a
+       or 'USERIO1/control/screen_mode' in a),
       ('RTG OSD first enable stage', lambda a, b: b == 'osd_rtg/enable_sync[0]'),
       ('native OSD EBR to HDMI', lambda a, b: a.startswith('native_osd/buffer') and b.startswith('hdmi_inst/')),
       ('Companion OSD enable', lambda a, b: a == 'companion/osd/enabled'),

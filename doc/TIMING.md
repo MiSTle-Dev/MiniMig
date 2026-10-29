@@ -9,10 +9,13 @@ The original IcePi LPF blocks paths into the RTG OSD enable synchronizer. Moving
 requires the new `osd_rtg/enable_sync[0]` path in the LPF as well as SDC. Only the asynchronous first stage is exempt;
 the path from the first stage to the second remains timed. `syn_preserve` retains these registers.
 
-The configuration latch moved from `USERIO1/osd1` to `USERIO1/control`. Slow menu settings (screen mode, offsets,
-filters, scanlines, audio filter and autofire) now use that hierarchy. Companion system CPU/chipset/video/memory,
-turbo/overclock and volume settings follow NanoMig's existing `sysctrl/system_*` exceptions, under the imported
-instance name `companion/control`. These exceptions cover held settings, not bitmap address counters or live video.
+The configuration latch moved from `USERIO1/osd1` to `USERIO1/control`; filters and scanlines use that hierarchy.
+Screen mode and offsets route directly from Companion to HDMI. Their held-setting exceptions use
+`companion/control/system_video*` (including `system_video_screen`), `companion/control/system_xoffset*` and
+`companion/control/system_yoffset*` in LPF, with the corresponding dotted hierarchy in SDC.
+Companion system CPU/chipset/video/memory, turbo/overclock and volume settings follow NanoMig's existing
+`sysctrl/system_*` exceptions, under the imported instance name `companion/control`.
+These exceptions cover held settings, not bitmap address counters or live video.
 
 SDC describes the two mutually exclusive generated pixel clocks and their asynchronous parents. Diamond LPF instead
 has one DCSC output frequency at 66 MHz, the fastest supported pixel rate. Native OSD pixels can only reach HDMI
