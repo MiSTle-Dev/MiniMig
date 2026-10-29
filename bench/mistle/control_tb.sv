@@ -29,7 +29,6 @@ module control_tb;
   wire overclock, system_reset, video_mode, floppy_wrprot, floppy_turbo, ide_enable;
   wire [7:0] xoffset, yoffset;
   wire [1:0] core_audio_filter, core_autofire;
-  wire [7:0] core_xoffset, core_yoffset;
   wire core_reset;
   sysctrl #(
       .AGA(1)
@@ -91,9 +90,6 @@ module control_tb;
       .cfg_ide({2'b11, ide_enable}),
       .cfg_filter(filter),
       .cfg_scanline(scanline),
-      .cfg_screen(screen),
-      .cfg_xoffset(xoffset),
-      .cfg_yoffset(yoffset),
       .cfg_reset(system_reset),
       .cfg_osd_enable(enabled),
       .cpu_config(core_cpu),
@@ -102,8 +98,6 @@ module control_tb;
       .key_disable(key_disable),
       .audio_filter_mode(core_audio_filter),
       .autofire_config(core_autofire),
-      .xoffset(core_xoffset),
-      .yoffset(core_yoffset),
       .usrrst(core_reset)
   );
   reg [7:0] bitmap[0:2047];
@@ -179,6 +173,7 @@ module control_tb;
       $fatal(1, "audio filter/autofire are not permanently disabled");
     set_value("R", 0);
     amiga_reset = 0;
+    // HDMI settings come directly from sysctrl, independently of the Amiga reset.
     for (integer i = 0; i < 4; i = i + 1) begin
       case (i)
         0: begin set_value("H", 8'h80); set_value("N", 0); end
@@ -186,11 +181,16 @@ module control_tb;
         2: begin set_value("H", 8'hff); set_value("N", 49); end
         3: begin set_value("H", 8'ha6); set_value("N", 47); end
       endcase
-      if (core_xoffset !== xoffset || core_yoffset !== yoffset || system_reset || core_reset)
-        $fatal(1, "offsets failed to apply live without reset");
+      set_value("W", i);
+      case (i)
+        0: if (xoffset !== 128 || yoffset !== 0) $fatal(1, "offset boundary 0");
+        1: if (xoffset !== 127 || yoffset !== 127) $fatal(1, "offset boundary 1");
+        2: if (xoffset !== 255 || yoffset !== 49) $fatal(1, "offset boundary 2");
+        3: if (xoffset !== 166 || yoffset !== 47) $fatal(1, "offset defaults changed");
+      endcase
+      if (screen !== i[1:0] || system_reset || core_reset)
+        $fatal(1, "HDMI settings failed to apply live without reset");
     end
-    if (core_xoffset !== 166 || core_yoffset !== 47)
-      $fatal(1, "offset defaults changed");
     #100;
     csn = 0;
     byte_send(2);
@@ -248,7 +248,7 @@ module control_tb;
     #100;
     csn = 1;
     #100;
-    $display("PASS control: SPI, CPUs, configuration, offsets, disabled filter/autofire, OSD, full 2 KiB menu ROM");
+    $display("PASS control: SPI, CPUs, config, HDMI settings, disabled filter/autofire, OSD, full 2 KiB menu ROM");
     $finish;
   end
   initial begin
