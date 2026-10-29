@@ -89,7 +89,17 @@ module hdmi_reset_tb;
         repeat (5) @(negedge clk);
         if (dut.screen_width !== 720 || dut.screen_height !== 576)
             $fatal(1, "Native timing lost after reset release");
-        $display("PASS: synchronous native/RTG reset, complete RTG frame and native fallback");
+        // Native requests include the border and shadow around the centered bitmap.
+        for (cycles = 0; cycles < 908*626; cycles = cycles + 1) begin
+            @(negedge clk);
+            expected_request_x = x + LEAD;
+            if (scan_pixel || scan_frame || scan_line)
+                $fatal(1, "RTG requests active in native mode");
+            if (osd_pixel !== (expected_request_x>=228 && expected_request_x<500 && y>=220 && y<364) ||
+                osd_frame !== (expected_request_x==228 && y==220))
+                $fatal(1, "Native OSD event alignment at %0d,%0d", x, y);
+        end
+        $display("PASS: synchronous native/RTG reset, complete frames and native/RTG OSD requests");
         $finish;
     end
 endmodule

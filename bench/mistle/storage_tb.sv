@@ -98,6 +98,7 @@ module storage_tb;
   reg active_write;
   reg [7:0] written[0:511];
   reg fail_next = 0, active_error = 0;
+  reg stall_transport = 0;
   reg [15:0] rdb_heads[0:1];
   reg [15:0] rdb_sectors[0:1];
   reg [15:0] rdb_cylinders[0:1];
@@ -143,7 +144,7 @@ module storage_tb;
       byte_addr = 0;
       requests = requests + 1;
       if (active_write) writes = writes + 1;
-    end else if (busy) begin
+    end else if (busy && !stall_transport) begin
       phase = phase + 1;
       if (phase == 4 && count < 512) begin
         byte_addr = count;
@@ -285,6 +286,7 @@ module storage_tb;
     end
     idle;
   endtask
+  integer before_requests;
   task reject_image(input [63:0] bytes);
     before_requests = requests;
     mount_image(1, bytes);
@@ -294,7 +296,6 @@ module storage_tb;
     if (dut.present[1] !== 0 || dut.mounted[1] !== 0 || requests != before_requests || !backend.error)
       $fatal(1, "invalid image accepted: %h", bytes);
   endtask
-  integer before_requests;
   initial begin
     rdb_cylinders[0] = 64;
     rdb_cylinders[1] = 64;
@@ -551,7 +552,35 @@ module storage_tb;
     mount_image(1, 512 * 8000);
     probe_done(1);
     check_identify(1, 8000, 64, 4, 17, 0);
-    $display("PASS storage: IDE/FIFO, bounds, CHS, multiple mode, arbitration, reset, remount, geometry RAM");
+
+    // An accepted SD read may outlive the IDE timeout. Complete the ATA error
+    // once, retain transport ownership until it drains, then allow a new command.
+    @(negedge clk);
+    stall_transport = 1;
+    issue(8'h20, 1, 1, 1);
+    wait (busy);
+    tick(20100);
+    #1;
+    if (dut.state != dut.IDLE || metadata[9] || drq || !backend.error || backend.tfr[1] != 8'h40)
+      $fatal(1, "read timeout failed to finish ATA error state=%0d meta=%h", dut.state, metadata);
+    if (dut.owner != dut.OWN_HDD || !busy)
+      $fatal(1, "timeout released an undrained SD transaction");
+    @(negedge clk);
+    stall_transport = 0;
+    idle;
+    check_identify(1, 8000, 64, 4, 17, 0);
+
+    // A guest that never supplies write data must lose DRQ and BSY on timeout.
+    before_requests = requests;
+    issue(8'h30, 1, 2, 1);
+    await_drq;
+    tick(20100);
+    #1;
+    if (dut.state != dut.IDLE || metadata[9] || drq || !backend.error || backend.tfr[1] != 8'h40)
+      $fatal(1, "write-data timeout failed to finish ATA error state=%0d meta=%h", dut.state, metadata);
+    if (requests != before_requests) $fatal(1, "write-data timeout started an SD transaction");
+    check_identify(1, 8000, 64, 4, 17, 0);
+    $display("PASS storage: IDE/FIFO, bounds, CHS, multiple mode, arbitration, reset, remount, geometry RAM, timeout");
     $finish;
   end
   initial begin

@@ -37,6 +37,47 @@ endtask
 integer i;
 reg [5:0] oldgen;
 initial begin
+  // Start from dirty control state: one enabled reset edge must clear it.
+  #1;
+  dut.busy = 1;
+  dut.pio_in = 1;
+  dut.pio_out = 1;
+  dut.error = 1;
+  dut.read_mult = 1;
+  dut.read_mult_ready = 1;
+  dut.block_mark = 1;
+  dut.dev = 3;
+  dut.drq_d = 1;
+  dut.intreq = 3;
+  dut.command_generation = 63;
+  dut.command_old = 1;
+  dut.packet_state = 2;
+  dut.packet_bytes = 16383;
+  dut.sector_count = 511;
+  dut.rd_old = 1;
+  dut.wr_old = 1;
+  dut.sel_fifo_old = 1;
+  dut.SECBUF1.inptr = 256;
+  dut.SECBUF1.outptr = 0;
+  dut.SECBUF1.rd_old = 1;
+  dut.SECBUF1.wr_old = 1;
+  dut.SECBUF1.empty_wr = 0;
+  dut.SECBUF1.mem[0] = 16'hbeef;
+  dut.tfr[7] = 8'ha5;
+  ticks(1);
+  if ({dut.busy, dut.pio_in, dut.pio_out, dut.error, dut.read_mult,
+       dut.read_mult_ready, dut.block_mark, dut.dev, dut.drq_d, irq,
+       dut.command_generation, dut.command_old, dut.packet_state,
+       dut.packet_bytes, dut.sector_count, dut.rd_old, dut.wr_old,
+       dut.sel_fifo_old} !== 0)
+    $fatal(1, "reset left dirty IDE control state");
+  if ({dut.SECBUF1.inptr, dut.SECBUF1.outptr, dut.SECBUF1.rd_old,
+       dut.SECBUF1.wr_old} !== 0 || dut.SECBUF1.empty_wr !== 1'b1)
+    $fatal(1, "reset left dirty FIFO control state");
+  if (drq !== 0 || hdd_cmd_req !== 0 || hdd_dat_req !== 0 || dut.fifo_empty !== 1)
+    $fatal(1, "reset left an IDE request active");
+  if (dut.SECBUF1.mem[0] !== 16'hbeef || dut.tfr[7] !== 8'ha5)
+    $fatal(1, "reset changed retained payload");
  ticks(3);reset=0;ticks(3);
  guest(6,16'hb000); guest(2,16'h0100);guest(7,16'ha000);
  regwrite(2,1);status(8'h24);
