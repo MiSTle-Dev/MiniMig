@@ -179,9 +179,6 @@ module minimig #(parameter usevideofilter=1'b1, parameter useaga=1'b1, parameter
 	input [2:0] cfg_ide,
 	input [1:0] cfg_filter,
 	input [1:0] cfg_scanline,
-	input [1:0] cfg_screen,
-	input [7:0] cfg_xoffset,
-	input [7:0] cfg_yoffset,
 	input cfg_reset,
 	input cfg_osd_enable,
 
@@ -311,9 +308,6 @@ module minimig #(parameter usevideofilter=1'b1, parameter useaga=1'b1, parameter
 	output  long_frame,
 	output  displaypal_out,
 	output  interlace_out,
-	output  [7:0] xoffset_out,
-	output  [7:0] yoffset_out,
-	output  [2:0] vmode_out,
 
 
 
@@ -469,7 +463,6 @@ wire	usrrst;					//user reset from osd interface
 wire	[1:0] lr_filter;		//lowres interpolation filter mode: bit 0 - horizontal, bit 1 - vertical
 wire	[1:0] hr_filter;		//hires interpolation filter mode: bit 0 - horizontal, bit 1 - vertical
 wire	[1:0] scanline;			//scanline effect configuration
-wire	[1:0] screen_mode;			//video output screen_mode
 wire	[1:0] hires;			//hires signal from Denise for interpolation filter enable in Amber
 //wire	aron;					//Action Replay is enabled
 wire	cpu_speed;				//requests CPU to switch speed mode
@@ -514,9 +507,6 @@ assign reset = sys_reset | ~_cpu_reset_in; // both tg68k and minimig_syscontrol 
 assign vblank_out = vbl_int;
 
 wire track_vsync;
-
-// repurpose unused screen_mode parameter as generic video mode parameter
-assign vmode_out = screen_mode;
 
 //--------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------
@@ -748,9 +738,6 @@ userio USERIO1
 	.cfg_ide(cfg_ide),
 	.cfg_filter(cfg_filter),
 	.cfg_scanline(cfg_scanline),
-	.cfg_screen(cfg_screen),
-	.cfg_xoffset(cfg_xoffset),
-	.cfg_yoffset(cfg_yoffset),
 	.cfg_reset(cfg_reset),
 	.cfg_osd_enable(cfg_osd_enable),
 
@@ -806,9 +793,6 @@ userio USERIO1
 	.chipset_config(userio_chipset_config),
 	.floppy_config(userio_floppy_config),
 	.scanline(scanline),
-	.screen_mode(screen_mode),
-	.xoffset(xoffset_out),
-	.yoffset(yoffset_out),
 	.ide_config0(userio_ide_config0),
 	.ide_config1(userio_ide_config1),
 	.cpu_config(userio_cpu_config),

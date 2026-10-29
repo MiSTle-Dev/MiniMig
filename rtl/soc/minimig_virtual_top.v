@@ -73,9 +73,6 @@ module minimig_virtual_top #(
 	input [2:0] cfg_ide,
 	input [1:0] cfg_filter,
 	input [1:0] cfg_scanline,
-	input [1:0] cfg_screen,
-	input [7:0] cfg_xoffset,
-	input [7:0] cfg_yoffset,
 	input cfg_reset,
 	input cfg_osd_enable,
 
@@ -136,9 +133,6 @@ module minimig_virtual_top #(
 	output wire           LONG_FRAME,
 	output wire           DISPLAY_PAL,
 	output wire           INTERLACE,
-	output wire [  8-1:0] VIDEO_XOFFSET,
-	output wire [  8-1:0] VIDEO_YOFFSET,
-	output wire [  2-1:0] VIDEO_MODE,
 
 	// SDRAM
 	inout  wire [ 16-1:0] SDRAM_DQ,   // SDRAM Data bus 16 Bits
@@ -309,7 +303,6 @@ assign sdctl_rst = PLL_LOCKED & RESET_N;
 // Native video blanking
 wire vblank_amiga;
 wire blank_amiga;
-wire unused_video_mode;
 
 // RTG register interface
 wire [10:0] rtg_reg_addr;
@@ -793,9 +786,6 @@ minimig #(.usevideofilter(havevideofilter),.useaga(haveaga),.usertg(1'b0),.wide_
 	.cfg_ide(cfg_ide),
 	.cfg_filter(cfg_filter),
 	.cfg_scanline(cfg_scanline),
-	.cfg_screen(cfg_screen),
-	.cfg_xoffset(cfg_xoffset),
-	.cfg_yoffset(cfg_yoffset),
 	.cfg_reset(cfg_reset),
 	.cfg_osd_enable(cfg_osd_enable),
 
@@ -933,9 +923,6 @@ minimig #(.usevideofilter(havevideofilter),.useaga(haveaga),.usertg(1'b0),.wide_
 	.long_frame   (LONG_FRAME       ),
 	.displaypal_out (DISPLAY_PAL    ),
 	.interlace_out(INTERLACE        ),
-	.xoffset_out  (VIDEO_XOFFSET    ),
-	.yoffset_out  (VIDEO_YOFFSET    ),
-	.vmode_out    ({unused_video_mode, VIDEO_MODE}),
 
 
 	.rtg_ena      (                 ),

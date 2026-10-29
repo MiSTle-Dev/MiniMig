@@ -8,9 +8,6 @@ module userio_config (
     input [2:0] cfg_ide,
     input [1:0] cfg_filter,
     input [1:0] cfg_scanline,
-    input [1:0] cfg_screen,
-    input [7:0] cfg_xoffset,
-    input [7:0] cfg_yoffset,
     input cfg_reset,
     input cfg_osd_enable,
 
@@ -40,9 +37,6 @@ module userio_config (
     output reg  [   4:0] chipset_config = 0,
     output reg  [   3:0] floppy_config = 0,
     output reg  [   1:0] scanline = 0,
-    output reg  [   1:0] screen_mode = 0,
-    output reg  [   7:0] xoffset = 8'd166,
-    output reg  [   7:0] yoffset = 8'd48,
     output reg  [   2:0] ide_config0 = 0,                //enable hard disk support
     output reg  [   2:0] ide_config1 = 0,                //enable hard disk support
     output reg  [   3:0] cpu_config = 0,
@@ -90,9 +84,6 @@ module userio_config (
     lr_filter <= cfg_filter;
     hr_filter <= cfg_filter;
     scanline <= cfg_scanline;
-    screen_mode <= cfg_screen;
-    xoffset <= cfg_xoffset;
-    yoffset <= cfg_yoffset;
     usrrst <= cfg_reset;
     cpurst <= cfg_reset;
     cpuhlt <= cfg_reset;

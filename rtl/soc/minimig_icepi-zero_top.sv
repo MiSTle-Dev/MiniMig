@@ -86,9 +86,6 @@ module minimig_icepizero_top #(
   wire display_pal;
   wire long_frame;
   wire interlace;
-  wire [7:0] video_xoffset;
-  wire [7:0] video_yoffset;
-  wire [1:0] video_mode;
   wire [3:0] auxclks;
   wire led_floppy;
   wire led_hdd;
@@ -307,9 +304,6 @@ module minimig_icepizero_top #(
       .cfg_ide(cfg_ide),
       .cfg_filter(cfg_filter),
       .cfg_scanline(cfg_scanline),
-      .cfg_screen(cfg_screen),
-      .cfg_xoffset(cfg_xoffset),
-      .cfg_yoffset(cfg_yoffset),
       .cfg_reset(cfg_reset),
       .cfg_osd_enable(cfg_osd_enable),
 
@@ -371,9 +365,6 @@ module minimig_icepizero_top #(
       .LONG_FRAME(long_frame),
       .DISPLAY_PAL(display_pal),
       .INTERLACE(interlace),
-      .VIDEO_XOFFSET(video_xoffset),
-      .VIDEO_YOFFSET(video_yoffset),
-      .VIDEO_MODE(video_mode),
       .SDRAM_DQ(sdram_dq),
       .SDRAM_A(sdram_a),
       .SDRAM_DQML(sdram_dqm[0]),
@@ -537,11 +528,11 @@ module minimig_icepizero_top #(
       .pal_mode(display_pal),
       .long_frame(long_frame),
       .interlace(interlace),
-      .screen_mode(video_mode),
+      .screen_mode(cfg_screen),
       .vsync_in(dvi_vsync_r),
       .hsync_in(dvi_hsync_r),
-      .offset_x(video_xoffset),
-      .offset_y(video_yoffset[6:0]),
+      .offset_x(cfg_xoffset),
+      .offset_y(cfg_yoffset[6:0]),
       .rgb(rgb),
       .audio_sample_word_0(hdmi_audio_sample[15:0]),
       .audio_sample_word_1(hdmi_audio_sample[31:16]),
