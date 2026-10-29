@@ -77,11 +77,7 @@ set_false_path -from [get_cells {virtual_top.minimig.chipset_config*}]
 set_false_path -from [get_cells {virtual_top.minimig.memory_config*}]
 set_false_path -from [get_cells {virtual_top.minimig.cpu_config*}]
 
-
 set_false_path -from [get_cells {virtual_top.minimig.AGNUS1.bc1.beamcon0*}]
-
-# Native DVI signals are launched in the 28.6 MHz domain.
-set_max_delay 34.96 -from [get_cells {virtual_top.DVI_*}] -to [get_cells {hdmi_inst.*}]
 
 set_false_path -to [get_cells {audio_sync.*sync*}]
 set_false_path -to [get_cells {clock_control.reset_sync*}]
@@ -124,10 +120,11 @@ set_clock_groups -asynchronous -group [get_clocks {clk}] -group [get_clocks {clk
 set_false_path -to [get_cells {companion.rom.req_sync[0]}]
 set_false_path -to [get_cells {companion.rom.ack_sync[0]}]
 set_false_path -to [get_cells {companion.rom.host_reset_sync[0]}]
-set_false_path -to [get_cells {companion_reset[0]}]
+set_false_path -to [get_cells {companion_reset_sync[0]}]
 
 # Companion MODE1 SPI and its first receive synchronizer stage.
 create_clock -name companion_spi -period 100 [get_ports {gpio[24]}]
+create_clock -name companion_spi_alt -period 100 [get_ports {gpio[11]}]
 set_false_path -to [get_cells {companion.spi.spi_data_in_readyD[0]}]
 set_false_path -to [get_cells {osd_reset_sync[0]}]
 
@@ -140,9 +137,9 @@ set_false_path -to [get_cells {companion.boot_ready_sync[0]}]
 # Only the asynchronous first enable stage is exempt; the second stage stays timed.
 set_false_path -to [get_cells {osd_rtg.enable_sync[0]}]
 # Held menu settings, equivalent to the original osd1/sysctrl exceptions.
-set_false_path -from [get_cells {virtual_top.minimig.USERIO1.control.screen_mode*}]
-set_false_path -from [get_cells {virtual_top.minimig.USERIO1.control.xoffset*}]
-set_false_path -from [get_cells {virtual_top.minimig.USERIO1.control.yoffset*}]
+# Screen mode is covered by companion.control.system_video* below.
+set_false_path -from [get_cells {companion.control.system_xoffset*}]
+set_false_path -from [get_cells {companion.control.system_yoffset*}]
 set_false_path -from [get_cells {virtual_top.minimig.USERIO1.control.lr_filter*}]
 set_false_path -from [get_cells {virtual_top.minimig.USERIO1.control.hr_filter*}]
 set_false_path -from [get_cells {virtual_top.minimig.USERIO1.control.scanline*}]
@@ -155,6 +152,11 @@ set_false_path -from [get_cells {companion.control.system_fastmem*}]
 set_false_path -from [get_cells {companion.control.system_turbo*}]
 set_false_path -from [get_cells {companion.control.system_volume*}]
 set_false_path -from [get_cells {companion.control.system_overclock*}]
+
+# Native DVI signals are launched in the 28.6 MHz domain.
+set_max_delay 34.96 -from [get_cells {native_rgb*}] -to [get_cells {hdmi_inst.*}]
+set_max_delay 34.96 -from [get_cells {dvi_vsync*}] -to [get_cells {hdmi_inst.*}]
+set_max_delay 34.96 -from [get_cells {dvi_hsync*}] -to [get_cells {hdmi_inst.*}]
 
 # Native bitmap pixels remain timed to the selected native parent. The
 # asynchronous clock groups above exclude the inactive RTG parent in synthesis.

@@ -398,6 +398,7 @@ LOCATE COMP "sd_dat[2]" SITE "M15";
 IOBUF PORT "sd_dat[2]" IO_TYPE=LVCMOS33 PULLMODE=UP;
 # Companion SPI input, MODE1; constrain for 10 MHz.
 FREQUENCY PORT "gpio[24]" 10.0 MHz;
+FREQUENCY PORT "gpio[11]" 10.0 MHz;
 
 LOCATE COMP "mspi_cs" SITE "N8";
 IOBUF PORT "mspi_cs" IO_TYPE=LVCMOS33 PULLMODE=UP;
@@ -421,9 +422,9 @@ IOBUF PORT "mspi_clk_ts" IO_TYPE=LVCMOS33 PULLMODE=DOWN;
 # Only the asynchronous first enable stage is exempt; the second stage stays timed.
 BLOCK PATH TO CELL "osd_rtg/enable_sync[0]";
 # Held menu settings, equivalent to the original osd1/sysctrl exceptions.
-BLOCK PATH FROM CELL "virtual_top/minimig/USERIO1/control/screen_mode*";
-BLOCK PATH FROM CELL "virtual_top/minimig/USERIO1/control/xoffset*";
-BLOCK PATH FROM CELL "virtual_top/minimig/USERIO1/control/yoffset*";
+# Screen mode is covered by companion/control/system_video* below.
+BLOCK PATH FROM CELL "companion/control/system_xoffset*";
+BLOCK PATH FROM CELL "companion/control/system_yoffset*";
 BLOCK PATH FROM CELL "virtual_top/minimig/USERIO1/control/lr_filter*";
 BLOCK PATH FROM CELL "virtual_top/minimig/USERIO1/control/hr_filter*";
 BLOCK PATH FROM CELL "virtual_top/minimig/USERIO1/control/scanline*";
@@ -440,6 +441,8 @@ BLOCK PATH FROM CELL "companion/control/system_overclock*";
 # LPF represents the DCSC output at its fastest (RTG) rate. Native pixels are
 # selected only with the native 28 MHz parent; retain their real setup budget.
 MAXDELAY FROM CELL "native_rgb*" TO CELL "hdmi_inst/*" 34.96 NS;
+MAXDELAY FROM CELL "dvi_vsync*" TO CELL "hdmi_inst/*" 34.96 NS;
+MAXDELAY FROM CELL "dvi_hsync*" TO CELL "hdmi_inst/*" 34.96 NS;
 MAXDELAY FROM CELL "native_osd/*" TO CELL "hdmi_inst/*" 34.96 NS;
 MAXDELAY FROM CELL "hdmi_inst/*" TO CELL "native_osd/*" 34.96 NS;
 # EBR outputs are ASIC pins, not CELL endpoints in Diamond.
@@ -461,7 +464,7 @@ BLOCK PATH FROM CELL "companion/osd/enabled";
 BLOCK PATH TO CELL "companion/rom/req_sync[0]";
 BLOCK PATH TO CELL "companion/rom/ack_sync[0]";
 BLOCK PATH TO CELL "companion/rom/host_reset_sync[0]";
-BLOCK PATH TO CELL "companion_reset[0]";
+BLOCK PATH TO CELL "companion_reset_sync[0]";
 BLOCK PATH TO CELL "companion/spi/spi_data_in_readyD[0]";
 BLOCK PATH TO CELL "osd_reset_sync[0]";
 BLOCK PATH TO CELL "flash_abort_sync[0]";
